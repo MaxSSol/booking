@@ -26,7 +26,7 @@ class UserFactory extends Factory
             'sex' => $sex,
             'country' => $this->faker->country(),
             'city' => $this->faker->city(),
-            'image' => $this->faker->imageUrl(),
+            'image' => $this->faker->imageUrl(80, 80, 'profile'),
             'remember_token' => Str::random(10),
             'is_ban' => $this->faker->boolean
         ];
