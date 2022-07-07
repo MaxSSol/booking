@@ -14,7 +14,7 @@ class AccommodationImageFactory extends Factory
     public function definition()
     {
         return [
-            'image' => $this->faker->imageUrl(),
+            'image' => $this->faker->imageUrl(1024, 1024, 'hotel'),
             'order' => $this->faker->numberBetween(1, 10)
         ];
     }
