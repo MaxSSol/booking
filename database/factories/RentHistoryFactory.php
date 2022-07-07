@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RentHistorytFactory extends Factory
+class RentHistoryFactory extends Factory
 {
     /**
      * Define the model's default state.
