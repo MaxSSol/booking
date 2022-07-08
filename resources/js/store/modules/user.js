@@ -21,7 +21,7 @@ export default {
     },
 
     actions: {
-        login({ commit }, user) {
+        async login({ commit }, user) {
             axios.get('/sanctum/csrf-cookie')
                 .then(() =>  {
                     axios.post('/api/login', user)

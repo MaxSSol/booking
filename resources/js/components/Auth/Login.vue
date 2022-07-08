@@ -1,6 +1,7 @@
 <template>
     <section class="flex justify-center items-center h-screen">
         <div class="flex flex-col items-center w-full lg:w-2/3">
+            <p class="text-2xl">Вхід</p>
             <div v-show="error">
                 <p class="text-base text-red-600 font-bold">Перевірте надані дані</p>
             </div>
@@ -18,17 +19,17 @@
                 </p>
             </div>
             <div class="text-center">
-                <action-btn title="Увійти" @click="submitForm"/>
+                <action-btn title="Увійти" @click="submitForm"></action-btn>
             </div>
         </div>
     </section>
 </template>
 
 <script>
-import { reactive, computed } from "vue";
+import {reactive, computed} from "vue";
 import {useStore} from "vuex";
 import useVuelidate from "@vuelidate/core";
-import { required, email, minLength } from "@vuelidate/validators";
+import {required, email, minLength} from "@vuelidate/validators";
 
 import AuthInput from "../UI/AuthInput";
 import ActionBtn from "../UI/ActionBtn";
@@ -56,12 +57,8 @@ export default {
         const v$ = useVuelidate(rules, user)
 
         const submitForm = async () => {
-            try {
-                await store.dispatch('login', user)
-                await router.push({name: 'home'})
-            } catch (e) {
-                error = true
-            }
+            await store.dispatch('login', user)
+            await router.replace({name: 'home'})
         }
 
 

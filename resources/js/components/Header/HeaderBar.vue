@@ -65,8 +65,9 @@
                     </li>
                     <li v-if="isUserLoggedIn">
                         <a href="#"
-                                     class="block hover:text-blue-700
-                                     text-base lg:text-xl py-2 lg:py-0 border-b-2"
+                                     class="block hover:text-blue-700 lg:mr-2
+                                     text-base lg:text-xl py-2 lg:py-0 border-b-2
+                                     lg:border-b-0"
                         >
                             {{ user.first_name }}
                         </a>
@@ -86,7 +87,7 @@
 </template>
 
 <script>
-import {ref} from "vue";
+import { ref, computed } from "vue";
 import {useStore} from "vuex";
 import router from "../../router";
 
@@ -96,8 +97,8 @@ export default {
         const store = useStore();
         let hiddenMenu = ref(true)
 
-        const isUserLoggedIn = store.getters.isUserLoggedIn
-        const user = store.getters.user
+        const isUserLoggedIn = computed(() => store.getters.isUserLoggedIn)
+        const user = computed(() => store.getters.user)
 
         const showMenu = () => {
             hiddenMenu.value = hiddenMenu.value !== true;
@@ -107,6 +108,7 @@ export default {
             axios.post('/api/logout', {_method: 'DELETE'})
                 .then(() => {
                     localStorage.removeItem('user')
+                    window.location.reload()
                     router.push('/')
                 })
         }
