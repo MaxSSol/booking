@@ -1,10 +1,13 @@
 <template>
-    <h1>Login</h1>
+    <login/>
 </template>
 
 <script>
+import Login from "../components/Auth/Login";
+
 export default {
-    name: "LoginView"
+    name: "LoginView",
+    components: {Login}
 }
 </script>
 
