@@ -20,3 +20,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login', '\App\Http\Controllers\Auth\LoginController@authentication');
 Route::delete('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::post('/registration', '\App\Http\Controllers\Auth\RegistrationController');
+
+Route::group(['prefix' => 'email'], function() {
+    Route::get('/verify/{id}/{hash}', '\App\Http\Controllers\Auth\VerifyEmailController@verifyEmail')
+        ->name('verification.verify')
+        ->middleware('signed');
+    Route::post('/verification-notification', '\App\Http\Controllers\Auth\VerifyEmailController@resendEmail')
+        ->name('verification.send');
+});
