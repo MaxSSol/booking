@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Notifications\EmailVerification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -49,6 +51,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = Hash::make($password);
+    }
+
     public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Role::class);
@@ -77,5 +84,10 @@ class User extends Authenticatable
     public function accommodationComments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(AccommodationComment::class);
+    }
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new EmailVerification());
     }
 }
