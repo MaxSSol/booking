@@ -19,7 +19,8 @@ class CreateAccommodationTable extends Migration
             $table->text('description');
             $table->integer('number_of_rooms');
             $table->integer('number_of_floors');
-            $table->string('city');
+            $table->string('address');
+            $table->foreignId('city_id')->constrained('cities');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
