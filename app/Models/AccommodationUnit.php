@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RentRequest extends Model
+class AccommodationUnit extends Model
 {
     use HasFactory;
 
@@ -14,13 +14,13 @@ class RentRequest extends Model
         return $this->belongsTo(Accommodation::class);
     }
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function images(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(AccommodationUnitImage::class);
     }
 
-    public function paymentMethod(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function facilities(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsTo(PaymentMethod::class);
+        return $this->belongsToMany(Facility::class);
     }
 }
