@@ -41,7 +41,7 @@ export default {
 
     setup() {
         const store = useStore();
-        let error = computed(() => store.getters.getError)
+        let error = computed(() => store.getters.getLoginError)
         let user = reactive({
             email: '',
             password: ''
@@ -57,8 +57,13 @@ export default {
         const v$ = useVuelidate(rules, user)
 
         const submitForm = async () => {
-            await store.dispatch('login', user)
-            await router.replace({name: 'home'})
+            v$.value.$validate()
+            if(v$.value.$errors.length === 0) {
+                await store.dispatch('login', user)
+                if (!error) {
+                    await router.push('/')
+                }
+            }
         }
 
 

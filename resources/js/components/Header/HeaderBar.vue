@@ -47,13 +47,13 @@
                             Обрати помешкання</a>
                     </li>
                     <li v-if="!isUserLoggedIn">
-                        <a href="#"
+                        <router-link :to="{name: 'registration'}"
                             class="mr-0 lg:mr-2 block
                             hover:text-blue-700 text-base lg:text-xl
                             border-b-2 lg:border-b-0 py-2 lg:py-0"
                         >
                             Зареєструватися
-                        </a>
+                        </router-link>
                     </li>
                     <li v-if="!isUserLoggedIn">
                         <router-link :to="{name: 'login'}"
