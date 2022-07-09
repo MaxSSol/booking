@@ -14,8 +14,8 @@ class PaymentMethod extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function rentRequests(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function rentHistories(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(RentRequest::class);
+        return $this->hasMany(RentHistory::class);
     }
 }

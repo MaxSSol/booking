@@ -9,8 +9,8 @@ class Facility extends Model
 {
     use HasFactory;
 
-    public function accommodations(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function units(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Accommodation::class);
+        return $this->belongsToMany(AccommodationUnit::class);
     }
 }

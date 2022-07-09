@@ -16,9 +16,9 @@ class Accommodation extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function facilities(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function units(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->belongsToMany(Facility::class);
+        return $this->hasMany(AccommodationUnit::class);
     }
 
     public function opportunities(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -26,18 +26,18 @@ class Accommodation extends Model
         return $this->belongsToMany(Opportunity::class);
     }
 
-    public function rentRequests(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(RentRequest::class);
-    }
-
     public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Category::class);
     }
 
-    public function accommodationComments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(AccommodationComment::class);
+    }
+
+    public function images(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(AccommodationImage::class);
     }
 }
