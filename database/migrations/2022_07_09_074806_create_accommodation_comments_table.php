@@ -15,6 +15,7 @@ class CreateAccommodationCommentsTable extends Migration
     {
         Schema::create('accommodation_comments', function (Blueprint $table) {
             $table->foreignId('accommodation_id')->constrained('accommodation');
+            $table->foreignId('accommodation_unit_id')->constrained('accommodation_units');
             $table->foreignId('user_id')->constrained('users');
             $table->text('comment');
             $table->float('total_rating');
