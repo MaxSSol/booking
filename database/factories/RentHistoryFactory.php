@@ -19,6 +19,7 @@ class RentHistoryFactory extends Factory
             'price' => $this->faker->numberBetween(1000,1700),
             'total_price' => $this->faker->numberBetween(4000,7000),
             'number_of_people' => $this->faker->numberBetween(1,3),
+            'check_status' => $this->faker->randomElement(['confirmed', 'rejected', 'unchecked'])
         ];
     }
 }
