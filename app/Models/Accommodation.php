@@ -16,7 +16,7 @@ class Accommodation extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function units(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function accommodationUnits(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(AccommodationUnit::class);
     }
@@ -39,5 +39,10 @@ class Accommodation extends Model
     public function images(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(AccommodationImage::class);
+    }
+
+    public function city(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(City::class);
     }
 }
