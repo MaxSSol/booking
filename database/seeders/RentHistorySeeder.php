@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\AccommodationUnit;
 use App\Models\RentHistory;
-use App\Models\RentRequest;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class RentHistorySeeder extends Seeder
@@ -15,17 +16,12 @@ class RentHistorySeeder extends Seeder
      */
     public function run()
     {
-        $rentRequest = RentRequest::all()->first();
-
         RentHistory::factory()
             ->create(
                 [
-                    'total_price' => $rentRequest->total_price,
-                    'rent_date_from' => $rentRequest->rent_date_from,
-                    'rent_date_to' => $rentRequest->rent_date_to,
-                    'user_id' => $rentRequest->user->id,
-                    'payment_method_id' => $rentRequest->paymentMethod->id,
-                    'accommodation_id' => $rentRequest->accommodation->id
+                    'user_id' => User::all()->random(),
+                    'accommodation_unit_id' => AccommodationUnit::all()->random(),
+                    'payment_method_id' => User::all()->first()
                 ]
             );
     }

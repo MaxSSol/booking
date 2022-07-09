@@ -3,12 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Accommodation;
-use App\Models\City;
+use App\Models\AccommodationUnit;
 use App\Models\RentInfo;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class AccommodationSeeder extends Seeder
+class AccommodationUnitSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,10 +16,11 @@ class AccommodationSeeder extends Seeder
      */
     public function run()
     {
-        Accommodation::factory()
+        AccommodationUnit::factory()
+            ->count(10)
             ->create([
-                'user_id' => User::all()->first(),
-                'city_id' => City::all()->random()
+                'rent_info_id' => RentInfo::all()->first(),
+                'accommodation_id' => Accommodation::all()->first()
             ]);
     }
 }

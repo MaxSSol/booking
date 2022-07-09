@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Accommodation;
+use App\Models\AccommodationUnit;
 use App\Models\Facility;
 use Illuminate\Database\Seeder;
 
@@ -17,7 +17,7 @@ class FacilitySeeder extends Seeder
     {
         Facility::factory()
             ->count(3)
-            ->hasAttached(Accommodation::all()->first())
+            ->hasAttached(AccommodationUnit::all()->first())
             ->create();
     }
 }

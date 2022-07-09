@@ -9,7 +9,7 @@ class AccommodationUnitImage extends Model
 {
     use HasFactory;
 
-    public function unit(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function accommodationUnits(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(AccommodationUnit::class);
     }
