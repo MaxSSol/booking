@@ -22,8 +22,9 @@ class AccommodationService
         return Accommodation::with(
             [
                 'accommodationUnits' => function ($query) use ($accommodationUnitFilter) {
-                    $query->filter($accommodationUnitFilter);
-                }
+                    $query->filter($accommodationUnitFilter)->with(['accommodationUnitImages']);
+                },
+                'accommodationImages'
             ]
         )
             ->filter($accommodationFilter)->get();

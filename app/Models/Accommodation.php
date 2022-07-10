@@ -38,7 +38,7 @@ class Accommodation extends Model
         return $this->hasMany(AccommodationComment::class);
     }
 
-    public function images(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function accommodationImages(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(AccommodationImage::class);
     }
