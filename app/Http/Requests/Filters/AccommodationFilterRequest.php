@@ -29,7 +29,8 @@ class AccommodationFilterRequest extends FormRequest
             'rent_date_from' => 'string',
             'category_id' => 'array',
             'opportunity_id' => 'array',
-            'facility_id' => 'array'
+            'facility_id' => 'array',
+            'rooms' => 'string'
         ];
     }
 }
