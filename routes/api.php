@@ -29,3 +29,7 @@ Route::group(['prefix' => 'email'], function() {
     Route::post('/verification-notification', '\App\Http\Controllers\Auth\VerifyEmailController@resendEmail')
         ->name('verification.send');
 });
+
+Route::apiResources([
+    'accommodation' => \App\Http\Controllers\Api\AccommodationController::class,
+]);
