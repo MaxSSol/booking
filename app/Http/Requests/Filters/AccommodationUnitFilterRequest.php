@@ -4,7 +4,7 @@ namespace App\Http\Requests\Filters;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AccommodationFilterRequest extends FormRequest
+class AccommodationUnitFilterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,10 +27,7 @@ class AccommodationFilterRequest extends FormRequest
             'city' => 'string',
             'people' => 'string',
             'rent_date_from' => 'string',
-            'category_id' => 'array',
-            'opportunity_id' => 'array',
             'facility_id' => 'array',
-            'rooms' => 'string',
             'min_price' => 'string',
             'max_price' => 'string'
         ];
