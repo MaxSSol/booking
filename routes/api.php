@@ -32,5 +32,6 @@ Route::group(['prefix' => 'email'], function() {
 
 Route::apiResources([
     'accommodation' => \App\Http\Controllers\Api\AccommodationController::class,
-    'categories' => \App\Http\Controllers\Api\CategoryController::class
+    'categories' => \App\Http\Controllers\Api\CategoryController::class,
+    'facilities' => \App\Http\Controllers\Api\FacilityController::class
 ]);
