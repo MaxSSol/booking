@@ -12,6 +12,7 @@ class AccommodationFilter extends AbstractFilter
     public const RENT_DATE_FROM = 'rent_date_from';
     public const PEOPLE = 'people';
     public const FACILITY_ID = 'facility_id';
+    public const ROOMS = 'rooms';
 
     protected function getCallbacks(): array
     {
@@ -21,7 +22,8 @@ class AccommodationFilter extends AbstractFilter
             self::OPPORTUNITY_ID => [$this, 'opportunity'],
             self::RENT_DATE_FROM => [$this, 'rentDateFrom'],
             self::PEOPLE => [$this, 'people'],
-            self::FACILITY_ID => [$this, 'facilities']
+            self::FACILITY_ID => [$this, 'facilities'],
+            self::ROOMS => [$this, 'rooms']
         ];
     }
 
@@ -56,7 +58,7 @@ class AccommodationFilter extends AbstractFilter
     public function people(Builder $builder, $people)
     {
         $builder->whereHas('accommodationUnits', function (Builder $query) use ($people) {
-           $query->where('max_count_people', '>=', $people);
+            $query->where('max_count_people', '>=', $people);
         });
     }
 
@@ -67,5 +69,11 @@ class AccommodationFilter extends AbstractFilter
                 $query->whereIn('facility_id', $facility_id);
             });
         });
+    }
+
+    public function rooms(Builder $builder, $rooms)
+    {
+        $builder->withCount('accommodationUnits')
+            ->having('accommodation_units_count', '>=', $rooms);
     }
 }

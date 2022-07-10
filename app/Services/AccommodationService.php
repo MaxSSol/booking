@@ -19,7 +19,8 @@ class AccommodationService
             return Accommodation::with(
                 [
                     'accommodationUnits' => function ($query) use ($request) {
-                        $query->where('date_available_from', '<=', $request->rent_date_from);
+                        $query->where('date_available_from', '<=', $request->rent_date_from)
+                              ->where('max_count_people', '>=', $request->people);
                     }
                 ]
             )
