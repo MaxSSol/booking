@@ -16,7 +16,7 @@ class AccommodationUnit extends Model
         return $this->belongsTo(Accommodation::class);
     }
 
-    public function images(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function accommodationUnitImages(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(AccommodationUnitImage::class);
     }
