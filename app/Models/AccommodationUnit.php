@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Filters\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class AccommodationUnit extends Model
 {
     use HasFactory;
+    use Filterable;
 
     public function accommodation(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Filters\AccommodationFilter;
+use App\Filters\AccommodationUnitFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Filters\AccommodationFilterRequest;
 use App\Http\Resources\AccommodationResource;
@@ -26,9 +27,10 @@ class AccommodationController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index(AccommodationFilterRequest $request, AccommodationFilter $filter)
+    public function index(AccommodationUnitFilter $accommodationUnitFilter, AccommodationFilter $accommodationFilter)
     {
-        $accommodation = $this->accommodationService->getAccommodationWithUnits($request, $filter);
+        $accommodation = $this->accommodationService
+            ->getAccommodationWithUnits($accommodationUnitFilter, $accommodationFilter);
 
         return AccommodationResource::collection($accommodation);
     }

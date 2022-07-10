@@ -3,15 +3,15 @@
 namespace App\Filters;
 
 use App\Contracts\Filter\Filter;
-use App\Http\Requests\Filters\AccommodationFilterRequest;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
+use Illuminate\Foundation\Http\FormRequest;
+
 
 abstract class AbstractFilter implements Filter
 {
     protected $queryParams = [];
 
-    public function __construct(AccommodationFilterRequest $request)
+    public function __construct(FormRequest $request)
     {
         $this->queryParams = $request->validated();
     }

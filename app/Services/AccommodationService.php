@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Filters\AccommodationFilter;
+use App\Filters\AccommodationUnitFilter;
 use App\Http\Requests\Filters\AccommodationFilterRequest;
 use App\Models\Accommodation;
 
@@ -13,19 +14,18 @@ class AccommodationService
      * @param AccommodationFilter $filter
      * @return mixed
      */
-    public function getAccommodationWithUnits(AccommodationFilterRequest $request, AccommodationFilter $filter)
+    public function getAccommodationWithUnits(
+        AccommodationUnitFilter $accommodationUnitFilter,
+        AccommodationFilter     $accommodationFilter
+    )
     {
-        if ($request->rent_date_from) {
-            return Accommodation::with(
-                [
-                    'accommodationUnits' => function ($query) use ($request) {
-                        $query->where('date_available_from', '<=', $request->rent_date_from)
-                              ->where('max_count_people', '>=', $request->people);
-                    }
-                ]
-            )
-                ->filter($filter)->get();
-        }
-        return  Accommodation::filter($filter)->get();
+        return Accommodation::with(
+            [
+                'accommodationUnits' => function ($query) use ($accommodationUnitFilter) {
+                    $query->filter($accommodationUnitFilter);
+                }
+            ]
+        )
+            ->filter($accommodationFilter)->get();
     }
 }

@@ -2,10 +2,16 @@
 
 namespace App\Filters;
 
+use App\Http\Requests\Filters\AccommodationFilterRequest;
 use Illuminate\Database\Eloquent\Builder;
 
 class AccommodationFilter extends AbstractFilter
 {
+    public function __construct(AccommodationFilterRequest $request)
+    {
+        parent::__construct($request);
+    }
+
     public const CITY = 'city';
     public const CATEGORY_ID = 'category_id';
     public const OPPORTUNITY_ID = 'opportunity_id';
@@ -13,6 +19,8 @@ class AccommodationFilter extends AbstractFilter
     public const PEOPLE = 'people';
     public const FACILITY_ID = 'facility_id';
     public const ROOMS = 'rooms';
+    public const MAX_PRICE = 'max_price';
+    public const MIN_PRICE = 'min_price';
 
     protected function getCallbacks(): array
     {
@@ -23,7 +31,9 @@ class AccommodationFilter extends AbstractFilter
             self::RENT_DATE_FROM => [$this, 'rentDateFrom'],
             self::PEOPLE => [$this, 'people'],
             self::FACILITY_ID => [$this, 'facilities'],
-            self::ROOMS => [$this, 'rooms']
+            self::ROOMS => [$this, 'rooms'],
+            self::MAX_PRICE => [$this, 'maxPrice'],
+            self::MIN_PRICE => [$this, 'minPrice']
         ];
     }
 
@@ -75,5 +85,19 @@ class AccommodationFilter extends AbstractFilter
     {
         $builder->withCount('accommodationUnits')
             ->having('accommodation_units_count', '>=', $rooms);
+    }
+
+    public function maxPrice(Builder $builder, $max_price)
+    {
+        $builder->whereHas('accommodationUnits', function (Builder $query) use ($max_price) {
+            $query->where('price', '<=', $max_price);
+        });
+    }
+
+    public function minPrice(Builder $builder, $min_price)
+    {
+        $builder->whereHas('accommodationUnits', function (Builder $query) use ($min_price) {
+            $query->where('price', '>=', $min_price);
+        });
     }
 }
