@@ -6,6 +6,8 @@ use App\Filters\AccommodationFilter;
 use App\Filters\AccommodationUnitFilter;
 use App\Http\Requests\Filters\AccommodationFilterRequest;
 use App\Models\Accommodation;
+use Illuminate\Database\Eloquent\Builder;
+
 
 class AccommodationService
 {
@@ -22,11 +24,13 @@ class AccommodationService
         return Accommodation::with(
             [
                 'accommodationUnits' => function ($query) use ($accommodationUnitFilter) {
-                    $query->filter($accommodationUnitFilter)->with(['accommodationUnitImages']);
+                    $query
+                        ->where('is_available', true)
+                        ->filter($accommodationUnitFilter)
+                        ->with(['accommodationUnitImages']);
                 },
                 'accommodationImages'
             ]
-        )
-            ->filter($accommodationFilter)->get();
+        )->filter($accommodationFilter)->get();
     }
 }

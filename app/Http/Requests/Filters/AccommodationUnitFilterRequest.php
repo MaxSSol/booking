@@ -27,6 +27,7 @@ class AccommodationUnitFilterRequest extends FormRequest
             'city' => 'string',
             'people' => 'string',
             'rent_date_from' => 'string',
+            'rooms' => 'string',
             'facility_id' => 'array',
             'min_price' => 'string',
             'max_price' => 'string'

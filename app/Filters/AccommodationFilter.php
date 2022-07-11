@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Builder;
 
 class AccommodationFilter extends AbstractFilter
 {
-    public function __construct(AccommodationFilterRequest $request)
+    public AccommodationUnitFilter $accommodationUnitFilter;
+
+    public function __construct(AccommodationFilterRequest $request, AccommodationUnitFilter $accommodationUnitFilter)
     {
         parent::__construct($request);
+        $this->accommodationUnitFilter = $accommodationUnitFilter;
     }
 
     public const CITY = 'city';
@@ -63,7 +66,9 @@ class AccommodationFilter extends AbstractFilter
     public function rentDateFrom(Builder $builder, $rent_date_from)
     {
         $builder->whereHas('accommodationUnits', function (Builder $query) use ($rent_date_from) {
-            $query->where('date_available_from', '<=', $rent_date_from);
+            $query
+                ->where('accommodation_units.is_available', true)
+                ->where('date_available_from', '<=', $rent_date_from);
         });
     }
 
@@ -85,8 +90,9 @@ class AccommodationFilter extends AbstractFilter
 
     public function rooms(Builder $builder, $rooms)
     {
-        $builder->withCount('accommodationUnits')
-            ->having('accommodation_units_count', '>=', $rooms);
+        $builder->whereHas('accommodationUnits', function (Builder $query) {
+                $query->where('is_available', true)->filter($this->accommodationUnitFilter);
+        }, '>=', $rooms);
     }
 
     public function maxPrice(Builder $builder, $max_price)
@@ -106,7 +112,7 @@ class AccommodationFilter extends AbstractFilter
     public function star(Builder $builder, $star_id)
     {
         $builder->whereHas('star', function (Builder $query) use ($star_id) {
-           $query->where('id', $star_id);
+            $query->where('id', $star_id);
         });
     }
 }
