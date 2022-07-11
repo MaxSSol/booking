@@ -47,4 +47,9 @@ class Accommodation extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    public function star(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Star::class);
+    }
 }

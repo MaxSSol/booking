@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
            PaymentMethodSeeder::class,
            RentInfoSeeder::class,
            CitySeeder::class,
+           StarSeeder::class,
            AccommodationSeeder::class,
            AccommodationUnitSeeder::class,
            OpportunitySeeder::class,
