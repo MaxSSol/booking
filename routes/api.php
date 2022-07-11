@@ -34,5 +34,6 @@ Route::apiResources([
     'accommodation' => \App\Http\Controllers\Api\AccommodationController::class,
     'categories' => \App\Http\Controllers\Api\CategoryController::class,
     'facilities' => \App\Http\Controllers\Api\FacilityController::class,
-    'opportunities' => \App\Http\Controllers\Api\OpportunityController::class
+    'opportunities' => \App\Http\Controllers\Api\OpportunityController::class,
+    'stars' => \App\Http\Controllers\Api\StarController::class
 ]);
