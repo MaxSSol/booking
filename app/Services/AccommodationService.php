@@ -10,8 +10,8 @@ use App\Models\Accommodation;
 class AccommodationService
 {
     /**
-     * @param AccommodationFilterRequest $request
-     * @param AccommodationFilter $filter
+     * @param AccommodationUnitFilter $accommodationUnitFilter
+     * @param AccommodationFilter $accommodationFilter
      * @return mixed
      */
     public function getAccommodationWithUnits(
