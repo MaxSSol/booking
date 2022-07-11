@@ -21,6 +21,7 @@ class AccommodationFilter extends AbstractFilter
     public const ROOMS = 'rooms';
     public const MAX_PRICE = 'max_price';
     public const MIN_PRICE = 'min_price';
+    public const STAR_ID = 'star_id';
 
     protected function getCallbacks(): array
     {
@@ -33,7 +34,8 @@ class AccommodationFilter extends AbstractFilter
             self::FACILITY_ID => [$this, 'facilities'],
             self::ROOMS => [$this, 'rooms'],
             self::MAX_PRICE => [$this, 'maxPrice'],
-            self::MIN_PRICE => [$this, 'minPrice']
+            self::MIN_PRICE => [$this, 'minPrice'],
+            self::STAR_ID => [$this, 'star']
         ];
     }
 
@@ -98,6 +100,13 @@ class AccommodationFilter extends AbstractFilter
     {
         $builder->whereHas('accommodationUnits', function (Builder $query) use ($min_price) {
             $query->where('price', '>=', $min_price);
+        });
+    }
+
+    public function star(Builder $builder, $star_id)
+    {
+        $builder->whereHas('star', function (Builder $query) use ($star_id) {
+           $query->where('id', $star_id);
         });
     }
 }

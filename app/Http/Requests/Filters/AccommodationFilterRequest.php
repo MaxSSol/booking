@@ -32,7 +32,8 @@ class AccommodationFilterRequest extends FormRequest
             'facility_id' => 'array',
             'rooms' => 'string',
             'min_price' => 'string',
-            'max_price' => 'string'
+            'max_price' => 'string',
+            'star_id' => 'array'
         ];
     }
 }
