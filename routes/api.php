@@ -37,7 +37,3 @@ Route::apiResources([
     'opportunities' => \App\Http\Controllers\Api\OpportunityController::class,
     'stars' => \App\Http\Controllers\Api\StarController::class
 ]);
-
-Route::get('/reservation/{id}', function ($id, \Illuminate\Http\Response $response) {
-    return $response->withCookie(cookie('reservation', $id, 15));
-});

@@ -3,12 +3,14 @@
          :key="accommodationUnit.id"
          class="item border p-4 rounded-lg flex flex-col items-center lg:items-start md:flex-row mb-2"
     >
-        <accommodation-unit-item :accommodation-unit="accommodationUnit" :days="days"></accommodation-unit-item>
+        <accommodation-unit-item :accommodation-unit="accommodationUnit" :days="days">
+        </accommodation-unit-item>
     </div>
 </template>
 
 <script>
 import AccommodationUnitItem from "./AccommodationUnitItem";
+
 export default {
     name: "AccommodationUnitList",
     components: {AccommodationUnitItem},

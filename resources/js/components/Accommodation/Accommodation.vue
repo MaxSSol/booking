@@ -10,7 +10,8 @@
                     {{category.title}}
                 </p>
                 <p class="text-2xl font-bold">{{ accommodation.title }}</p>
-                <p class="text-base ml-0 lg:ml-4">Адреса - {{ accommodation.address }}, {{accommodation.city?.title}}</p>
+                <p class="text-base ml-0 lg:ml-4">Адреса - {{ accommodation.address }},
+                    {{accommodation.city?.title}}</p>
             </div>
             <div>
                 <div class="flex flex-col lg:flex-row mt-2">
@@ -59,7 +60,8 @@
             sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6
             gap-2 mt-2 justify-items-center lg:justify-items-start"
             >
-                <div class="opportunity flex items-center" v-for="opportunity in accommodation.opportunities" :key="opportunity.id">
+                <div class="opportunity flex items-center" v-for="opportunity in accommodation.opportunities"
+                     :key="opportunity.id">
                     <img src="https://img.icons8.com/ios-glyphs/30/000000/time-lapse.png" alt="V"/>
                     <p class="text-xl">{{opportunity.title}}</p>
                 </div>
@@ -119,12 +121,26 @@
                                  :days="days"
         >
         </accommodation-unit-list>
+        <div class="text-center" v-show="reservation.length > 0">
+            <p class="text-xl font-bold">Разом: {{ totalPrice }}</p>
+            <button @click="addReservation"
+                    class="border text-sm px-4
+                    py-2 bg-blue-700 text-white cursor-pointer
+                    lg:text-base lg:px-8 lg:py-2 font-bold
+                    lg:text-xl mt-2 lg:mt-6 hover:opacity-50"
+            >
+                Перейти до бронювання
+            </button>
+        </div>
     </section>
 </template>
 
 <script>
 import AccommodationImages from "./AccommodationImages";
 import AccommodationUnitList from "../AccommodationUnit/AccommodationUnitList";
+import {useStore} from "vuex";
+import { computed } from "vue";
+import router from "../../router";
 
 export default {
     name: "Accommodation",
@@ -143,6 +159,22 @@ export default {
         days: {
             type: Number,
             require: true
+        }
+    },
+    setup() {
+        const store = useStore()
+        let reservation = computed(() => store.getters['accommodationUnit/getReservationUnits'])
+        let totalPrice = computed(() => store.getters['accommodationUnit/getReservationPrice'])
+
+        const addReservation = () => {
+            localStorage.setItem('reservation',JSON.stringify(reservation.value))
+            router.push('/reservation')
+        }
+
+        return {
+            reservation,
+            totalPrice,
+            addReservation
         }
     }
 }
