@@ -17,14 +17,14 @@
         </div>
         <div class="w-full lg:w-auto text-center lg:text-right">
             <p class="mt-2 mb-2 text-2xl font-bold">Ціна: {{ accommodation.accommodation_units[0].price }}</p>
-            <button
+            <router-link :to="{name: 'accommodation-unit', params: {id: accommodation.id}}"
                class="border text-sm px-1
                       py-1 bg-blue-700 text-white
                       lg:text-base lg:px-8 lg:py-2
                       lg:text-xl mt-2 lg:mt-6 hover:opacity-50"
             >
                 Переглянути наявність місць
-            </button>
+            </router-link>
         </div>
     </div>
 </template>
