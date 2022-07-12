@@ -7,6 +7,7 @@ use App\Filters\AccommodationUnitFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Filters\AccommodationFilterRequest;
 use App\Http\Resources\AccommodationResource;
+use App\Models\Accommodation;
 use App\Services\AccommodationService;
 use Illuminate\Http\Request;
 
@@ -54,11 +55,13 @@ class AccommodationController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function show($id)
+    public function show($id, AccommodationUnitFilter $filter)
     {
-        //
+        $accommodation = $this->accommodationService->getAccommodationByIdWithUnits($id, $filter);
+
+        return AccommodationResource::collection($accommodation);
     }
 
     /**

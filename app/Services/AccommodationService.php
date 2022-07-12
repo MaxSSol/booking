@@ -34,8 +34,7 @@ class AccommodationService
                 'star'
             ]
         )
-            ->filter($accommodationFilter)
-            ;
+            ->filter($accommodationFilter);
     }
 
     public function getMaxPrice(Collection $accommodation)
@@ -54,5 +53,19 @@ class AccommodationService
         });
 
         return $minPrice->min();
+    }
+
+    public function getAccommodationByIdWithUnits($id, AccommodationUnitFilter $filter)
+    {
+        return Accommodation::with(
+            [
+                'accommodationUnits' => function ($query) use ($filter) {
+                    $query->filter($filter)->with('facilities:id,title', 'accommodationUnitImages');
+                },
+                'city:id,title',
+                'opportunities:id,title',
+                'accommodationImages'
+            ]
+        )->where('id', $id)->get();
     }
 }
