@@ -9,7 +9,7 @@ export default {
     getters: {
         getFacilities: state => state.facilities,
         getStatusLoaded: state => state.isLoaded,
-        getPopular: state => state.facilities.slice(0,2)
+        getPopular: state => state.facilities.length > 1 ? state.facilities.slice(0,2) : ''
     },
 
     mutations: {

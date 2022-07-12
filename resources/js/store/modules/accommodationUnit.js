@@ -4,33 +4,48 @@ export default {
     state: {
         accommodationUnits: [],
         error: false,
+        isLoaded: false,
+        totalRating: 0,
+        countComments: 0
     },
     getters: {
-        getAccommodation: state => state.accommodation,
-        isLoaded: state => state.accommodation.length > 0,
+        getAccommodationUnits: state => state.accommodationUnits,
+        isLoaded: state => state.accommodationUnits !== {},
         getError: state => state.error,
-        getSearchParams: state => state.searchParams,
-        getPaginateParams: state => state.paginate,
-        getPrices: state => state.prices
+        getTotalRating: state => state.totalRating,
+        getCountComments: state => state.countComments
     },
     mutations: {
         SET_ACCOMMODATION_UNITS(state, accommodationUnits) {
-            state.accommodation = accommodationUnits
+            state.accommodationUnits = accommodationUnits
         },
 
         SET_ERROR(state, error) {
             state.error = error
-        }
+        },
 
+        SET_LOADED(state, status) {
+            state.isLoaded = status
+        },
+
+        SET_TOTAL_RATING(state, totalRating) {
+            state.totalRating = totalRating
+        },
+
+        SET_COUNT_COMMENTS(state, count) {
+            state.countComments = count
+        }
     },
     actions: {
-        async fetchAccommodationUnits({commit}, id, searchParams) {
+        fetchAccommodationUnits({commit}, id, searchParams) {
             axios.get('/api/accommodation/' + id, {
                 params: searchParams
             })
                 .then(res => {
-                    console.log(res)
-                    commit('SET_ACCOMMODATION_UNITS', res.data.data)
+                    commit('SET_ACCOMMODATION_UNITS', res.data.data[0])
+                    commit('SET_LOADED', true)
+                    commit('SET_TOTAL_RATING', res.data.total_rating)
+                    commit('SET_COUNT_COMMENTS', res.data.count_comments)
                 })
                 .catch(() => commit('SET_ERROR', true))
         }

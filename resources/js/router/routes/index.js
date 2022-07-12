@@ -4,6 +4,7 @@ import RegistrationView from "../../views/RegistrationView";
 import Profile from "../../components/Auth/Profile"; //TODO: Change to ProfileView
 import AccommodationView from "../../views/AccommodationView";
 import AccommodationUnitView from "../../views/AccommodationUnitsView"
+
 export default [
     {
         path: '/',
