@@ -86,7 +86,7 @@ export default {
         const submitForm = async () => {
             v$.value.$validate()
             if(v$.value.$errors.length === 0) {
-                await store.dispatch('registration', user)
+                await store.dispatch('user/registration', user)
                 if (!error) {
                     await router.push('/')
                 }

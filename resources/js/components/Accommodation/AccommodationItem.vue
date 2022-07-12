@@ -1,0 +1,46 @@
+<template>
+    <div class="photo mx-auto w-[300px] h-[300px] lg:mr-4">
+        <img
+            :src="accommodation.accommodation_images[0].image"
+            alt="photo"
+        >
+    </div>
+    <div class="item-info gap-6 w-2/3 flex flex-col justify-between">
+        <div class="text-start">
+            <p class="text-xl">
+                {{ accommodation.title }}
+            </p>
+            <p class="text-sm">{{ accommodation.city.title }}</p>
+            <p>
+                {{ accommodation.address }}
+            </p>
+        </div>
+        <div class="w-full lg:w-auto text-center lg:text-right">
+            <p class="mt-2 mb-2 text-2xl font-bold">Ціна: {{ accommodation.accommodation_units[0].price }}</p>
+            <button
+               class="border text-sm px-1
+                      py-1 bg-blue-700 text-white
+                      lg:text-base lg:px-8 lg:py-2
+                      lg:text-xl mt-2 lg:mt-6 hover:opacity-50"
+            >
+                Переглянути наявність місць
+            </button>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "AccommodationItem",
+    props: {
+        accommodation: {
+            type: Object,
+            require: true
+        }
+    }
+}
+</script>
+
+<style scoped>
+
+</style>

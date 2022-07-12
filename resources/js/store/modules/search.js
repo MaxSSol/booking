@@ -1,4 +1,6 @@
 export default {
+    namespaced: true,
+
     state: {
         search: localStorage.getItem('search') ? JSON.parse(localStorage.getItem('search')) : null,
     },

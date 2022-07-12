@@ -32,7 +32,11 @@ class AccommodationController extends Controller
         $accommodation = $this->accommodationService
             ->getAccommodationWithUnits($accommodationUnitFilter, $accommodationFilter);
 
-        return AccommodationResource::collection($accommodation);
+        $maxPrice = $this->accommodationService->getMaxPrice($accommodation->get());
+        $minPrice = $this->accommodationService->getMinPrice($accommodation->get());
+
+        return AccommodationResource::collection($accommodation->paginate(10))
+            ->additional(['min_price' => $minPrice, 'max_price' => $maxPrice]);
     }
 
     /**

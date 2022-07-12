@@ -4,9 +4,8 @@ namespace App\Services;
 
 use App\Filters\AccommodationFilter;
 use App\Filters\AccommodationUnitFilter;
-use App\Http\Requests\Filters\AccommodationFilterRequest;
 use App\Models\Accommodation;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 
 class AccommodationService
@@ -27,10 +26,33 @@ class AccommodationService
                     $query
                         ->where('is_available', true)
                         ->filter($accommodationUnitFilter)
-                        ->with(['accommodationUnitImages']);
+                        ->with(['accommodationUnitImages', 'facilities'])
+                        ->orderBy('price');
                 },
-                'accommodationImages'
+                'accommodationImages',
+                'city',
+                'star'
             ]
-        )->filter($accommodationFilter)->get();
+        )
+            ->filter($accommodationFilter)
+            ;
+    }
+
+    public function getMaxPrice(Collection $accommodation)
+    {
+        $maxPrice = $accommodation->map(function ($accommodationItem) {
+            return $accommodationItem->accommodationUnits->max('price');
+        });
+
+        return $maxPrice->max();
+    }
+
+    public function getMinPrice(Collection $accommodation)
+    {
+        $minPrice = $accommodation->map(function ($accommodationItem) {
+            return $accommodationItem->accommodationUnits->min('price');
+        });
+
+        return $minPrice->min();
     }
 }

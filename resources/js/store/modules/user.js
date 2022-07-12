@@ -1,4 +1,6 @@
 export default {
+    namespaced: true,
+
     state: {
         user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
         loginErr: '',
