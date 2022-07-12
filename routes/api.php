@@ -35,5 +35,8 @@ Route::apiResources([
     'categories' => \App\Http\Controllers\Api\CategoryController::class,
     'facilities' => \App\Http\Controllers\Api\FacilityController::class,
     'opportunities' => \App\Http\Controllers\Api\OpportunityController::class,
-    'stars' => \App\Http\Controllers\Api\StarController::class
+    'stars' => \App\Http\Controllers\Api\StarController::class,
+    'reservations' => \App\Http\Controllers\Api\ReservationController::class
 ]);
+
+Route::get('/payment', '\App\Http\Controllers\Api\AccommodationPaymentMethodController');
