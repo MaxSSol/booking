@@ -139,7 +139,8 @@
 import AccommodationImages from "./AccommodationImages";
 import AccommodationUnitList from "../AccommodationUnit/AccommodationUnitList";
 import {useStore} from "vuex";
-import {computed} from "vue";
+import { computed, onBeforeUnmount } from "vue";
+import router from "../../router";
 
 export default {
     name: "Accommodation",
@@ -165,11 +166,15 @@ export default {
         let reservation = computed(() => store.getters['accommodationUnit/getReservationUnits'])
         let totalPrice = computed(() => store.getters['accommodationUnit/getReservationPrice'])
 
-
+        const addReservation = () => {
+            localStorage.setItem('reservation',JSON.stringify(reservation.value))
+            router.push('/reservation')
+        }
 
         return {
             reservation,
-            totalPrice
+            totalPrice,
+            addReservation
         }
     }
 }

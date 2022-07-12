@@ -11,7 +11,6 @@ export default {
         countComments: 0,
         reservationUnits: [],
         reservationPrice: [],
-        reservationSet: true
     },
     getters: {
         getAccommodationUnits: state => state.accommodationUnits,
@@ -58,10 +57,6 @@ export default {
         REMOVE_RESERVATION_PRICE(state, price) {
             console.log(price)
             state.reservationPrice = state.reservationPrice.filter(p => p !== price)
-        },
-
-        SET_RESERVATION_STATUS(state, status) {
-            state.reservationSet = status
         }
     },
     actions: {
@@ -76,14 +71,6 @@ export default {
                     commit('SET_COUNT_COMMENTS', res.data.count_comments)
                 })
                 .catch(() => commit('SET_ERROR', true))
-        },
-
-        saveReservation({commit, state}) {
-            axios.get('/api/reservation', {
-                params: state.reservationUnits
-            })
-                .then(() => commit('SET_RESERVATION_STATUS', true))
-                .catch(() => commit('SET_RESERVATION_STATUS', false))
         }
     }
 }
