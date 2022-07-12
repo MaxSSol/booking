@@ -100,7 +100,7 @@ export default {
         const store = useStore();
 
         let search = reactive({
-            city: store.getters.getSearch.city !== '' ? store.getters.getSearch.city : '',
+            city: store.getters["search/activeSearch"] === true ? store.getters["search/getSearch"].city : '',
             people: 1,
             rooms: 1
         })
@@ -165,14 +165,20 @@ export default {
             if (v$.value.$errors.length === 0) {
                 let searchParams = {
                     ...search,
-                    ...dateValue.value
+                    ...dateValue.value,
+                    category_id: [],
+                    opportunity_id: [],
+                    facility_id: [],
+                    star_id: [],
+                    min_price: '',
+                    max_price: ''
                 }
 
                 localStorage.setItem('search', JSON.stringify(searchParams))
-                store.commit('SET_SEARCH', searchParams)
+                store.commit('search/SET_SEARCH', searchParams)
 
-                store.commit('SET_SEARCH_PARAMS', searchParams);
-                store.dispatch('fetchAccommodation')
+                store.commit('accommodation/SET_SEARCH_PARAMS', searchParams);
+                store.dispatch('accommodation/fetchAccommodation', searchParams)
 
                 router.push('/accommodation')
             }

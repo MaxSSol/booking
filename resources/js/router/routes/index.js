@@ -1,7 +1,8 @@
 import HomeView from "../../views/HomeView";
 import LoginView from "../../views/LoginView";
 import RegistrationView from "../../views/RegistrationView";
-import Profile from "../../components/Auth/Profile";
+import Profile from "../../components/Auth/Profile"; //TODO: Change to ProfileView
+import AccommodationView from "../../views/AccommodationView";
 
 export default [
     {
@@ -26,5 +27,11 @@ export default [
         name: 'profile',
         component: Profile,
         meta: { auth: true }
+    },
+    {
+        path: '/accommodation',
+        name: 'accommodation',
+        component: AccommodationView,
+        meta: { guest: true }
     }
 ]

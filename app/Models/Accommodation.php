@@ -33,7 +33,7 @@ class Accommodation extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function accommodationComments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(AccommodationComment::class);
     }

@@ -17,6 +17,7 @@ class AccommodationUnitFilter extends AbstractFilter
     public const FACILITY_ID = 'facility_id';
     public const MAX_PRICE = 'max_price';
     public const MIN_PRICE = 'min_price';
+    public const RENT_DATE_FROM = 'rent_date_from';
 
     protected function getCallbacks(): array
     {
@@ -24,13 +25,19 @@ class AccommodationUnitFilter extends AbstractFilter
             self::PEOPLE => [$this, 'people'],
             self::FACILITY_ID => [$this, 'facilities'],
             self::MAX_PRICE => [$this, 'maxPrice'],
-            self::MIN_PRICE => [$this, 'minPrice']
+            self::MIN_PRICE => [$this, 'minPrice'],
+            self::RENT_DATE_FROM => [$this, 'rentDateAvailable']
         ];
     }
 
     public function people(Builder $builder, $people)
     {
         $builder->where('max_count_people', '>=', $people);
+    }
+
+    public function rentDateAvailable(Builder $builder, $rent_date_from)
+    {
+        $builder->where('date_available_from', '<=', $rent_date_from);
     }
 
     public function facilities(Builder $builder, $facility_id)

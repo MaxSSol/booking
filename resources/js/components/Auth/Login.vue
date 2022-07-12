@@ -59,7 +59,7 @@ export default {
         const submitForm = async () => {
             v$.value.$validate()
             if(v$.value.$errors.length === 0) {
-                await store.dispatch('login', user)
+                await store.dispatch('user/login', user)
                 if (!error) {
                     await router.push('/')
                 }
