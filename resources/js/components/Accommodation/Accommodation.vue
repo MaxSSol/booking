@@ -139,7 +139,7 @@
 import AccommodationImages from "./AccommodationImages";
 import AccommodationUnitList from "../AccommodationUnit/AccommodationUnitList";
 import {useStore} from "vuex";
-import { computed, onBeforeUnmount } from "vue";
+import { computed } from "vue";
 import router from "../../router";
 
 export default {
