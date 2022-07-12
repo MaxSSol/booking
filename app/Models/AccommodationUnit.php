@@ -28,4 +28,9 @@ class AccommodationUnit extends Model
     {
         return $this->belongsToMany(Facility::class);
     }
+
+    public function user()
+    {
+        $this->hasOneThrough(User::class,Accommodation::class, 'id', 'accommodation_id',   'id', 'id' );
+    }
 }
