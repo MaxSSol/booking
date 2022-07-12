@@ -9,7 +9,7 @@ export default {
     getters: {
         getCategories: state => state.categories,
         getStatusLoaded: state => state.isLoaded,
-        getPopular: state => state.categories.slice(0,2)
+        getPopular: state => state.categories.length > 1 ? state.categories.slice(0,2) : ''
     },
 
     mutations: {

@@ -3,6 +3,7 @@ import LoginView from "../../views/LoginView";
 import RegistrationView from "../../views/RegistrationView";
 import Profile from "../../components/Auth/Profile"; //TODO: Change to ProfileView
 import AccommodationView from "../../views/AccommodationView";
+import AccommodationUnitView from "../../views/AccommodationUnitsView"
 
 export default [
     {
@@ -33,5 +34,12 @@ export default [
         name: 'accommodation',
         component: AccommodationView,
         meta: { guest: true }
+    },
+    {
+        path: '/accommodation/:id',
+        name: 'accommodation-unit',
+        component: AccommodationUnitView,
+        meta: { guest: true },
+        props: true
     }
 ]

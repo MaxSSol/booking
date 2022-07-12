@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Filters\AccommodationFilter;
 use App\Filters\AccommodationUnitFilter;
 use App\Models\Accommodation;
+use App\Models\AccommodationComment;
 use Illuminate\Database\Eloquent\Collection;
 
 
@@ -62,10 +63,33 @@ class AccommodationService
                 'accommodationUnits' => function ($query) use ($filter) {
                     $query->filter($filter)->with('facilities:id,title', 'accommodationUnitImages');
                 },
-                'city:id,title',
+                'city',
                 'opportunities:id,title',
-                'accommodationImages'
+                'accommodationImages',
+                'categories'
             ]
         )->where('id', $id)->get();
+    }
+
+    public function getAccommodationTotalRatingById($id)
+    {
+        $totalRating = AccommodationComment::where('accommodation_id', $id)->avg('total_rating');
+        $facilities = AccommodationComment::where('accommodation_id', $id)->avg('facilities');
+        $location = AccommodationComment::where('accommodation_id', $id)->avg('location');
+        $service = AccommodationComment::where('accommodation_id', $id)->avg('service');
+        $price = AccommodationComment::where('accommodation_id', $id)->avg('price');
+
+        return [
+            'total_rating' => $totalRating,
+            'facilities' => $facilities,
+            'location' => $location,
+            'service' => $service,
+            'price' => $price
+        ];
+    }
+
+    public function getAccommodationCountCommentsById($id)
+    {
+        return AccommodationComment::where('accommodation_id', $id)->count();
     }
 }

@@ -60,8 +60,10 @@ class AccommodationController extends Controller
     public function show($id, AccommodationUnitFilter $filter)
     {
         $accommodation = $this->accommodationService->getAccommodationByIdWithUnits($id, $filter);
-
-        return AccommodationResource::collection($accommodation);
+        $totalRating = $this->accommodationService->getAccommodationTotalRatingById($id);
+        $countComments = $this->accommodationService->getAccommodationCountCommentsById($id);
+        return AccommodationResource::collection($accommodation)
+            ->additional(['total_rating' => $totalRating, 'count_comments' => $countComments]);
     }
 
     /**

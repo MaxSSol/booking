@@ -14,11 +14,12 @@ export default {
         },
         error: false,
         paginate: [],
-        prices: []
+        prices: [],
+        isLoaded: false
     },
     getters: {
         getAccommodation: state => state.accommodation,
-        isLoaded: state => state.accommodation.length > 0,
+        isLoaded: state => state.isLoaded,
         getError: state => state.error,
         getSearchParams: state => state.searchParams,
         getPaginateParams: state => state.paginate,
@@ -43,6 +44,10 @@ export default {
 
         SET_PRICES(state, prices) {
             state.prices = prices
+        },
+
+        SET_LOADED(state, status) {
+            state.isLoaded = status
         }
 
     },
@@ -58,6 +63,7 @@ export default {
                 })
                     commit('SET_ACCOMMODATION', res.data.data)
                     commit('SET_PAGINATE_PARAMS', res.data.meta)
+                    commit('SET_LOADED', true);
                 })
                 .catch(() => commit('SET_ERROR', true))
         }

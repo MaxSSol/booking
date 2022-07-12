@@ -4,6 +4,11 @@
             Завантаження...
         </p>
     </section>
+    <section class="flex-grow" v-else-if="isLoaded && accommodation.length === 0">
+        <p class="font-bold text-3xl text-center">
+            На жаль, ми нічого не знайшли за вашими параметрами пошуку
+        </p>
+    </section>
     <section v-else>
         <p class="text-base py-2 px-6
        bg-blue-900 text-white cursor-pointer
@@ -109,7 +114,7 @@
                 </div>
             </div>
             <div class="apartments w-full">
-                <accommodation-list :accommodations="accommodation"></accommodation-list>
+                <accommodation-list :accommodations="accommodation" :days="days"></accommodation-list>
                 <paginate
                     v-model="currentPage"
                     :page-count="paginate.last_page"
@@ -132,6 +137,7 @@ import router from "../router";
 import FilterCheckbox from "../components/UI/FilterCheckbox";
 import AccommodationList from "../components/Accommodation/AccommodationList";
 import Paginate from "vuejs-paginate-next";
+import daysFromDate from "../helpers/daysFromDate";
 
 export default {
     name: "AccommodationView",
@@ -196,6 +202,11 @@ export default {
         let popularCategories = computed(() => store.getters['category/getPopular'])
         let popularFacilities = computed(() => store.getters['facility/getPopular'])
 
+        let rentDateFrom = searchParams.rent_date_from
+        let rentDateTo = searchParams.rent_date_to
+        let days = daysFromDate(rentDateFrom, rentDateTo)
+
+
         return {
             categories,
             hiddenFiltersMenu,
@@ -210,7 +221,8 @@ export default {
             isLoaded,
             stars,
             popularCategories,
-            popularFacilities
+            popularFacilities,
+            days
         }
     }
 }
