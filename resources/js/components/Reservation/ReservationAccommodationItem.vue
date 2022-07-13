@@ -16,7 +16,7 @@
             <p class="text-xl font-bold">
                 Кількість днів: {{ days }}
                 Ціна: {{ totalPrice }}</p>
-            <button @click="removeReservation"
+            <button @click="removeReservation(accommodationUnit.id)"
                     class="border text-sm px-4
                     py-2 bg-red-700 text-white cursor-pointer
                     lg:text-base lg:px-8 lg:py-2 font-bold
@@ -54,6 +54,7 @@ export default {
         store.commit('reservation/SET_TOTAL_PRICE', totalPrice)
 
         const removeReservation = (id) => {
+            console.log(id)
             let ids = JSON.parse(localStorage.getItem('reservation'))
             if (ids.length > 1) {
                 ids = ids.filter(i => i !== id)
