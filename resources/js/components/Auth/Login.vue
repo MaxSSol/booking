@@ -41,7 +41,7 @@ export default {
 
     setup() {
         const store = useStore();
-        let error = computed(() => store.getters.getLoginError)
+        let error = computed(() => store.getters['user/getLoginError'])
         let user = reactive({
             email: '',
             password: ''
@@ -60,9 +60,12 @@ export default {
             v$.value.$validate()
             if(v$.value.$errors.length === 0) {
                 await store.dispatch('user/login', user)
-                if (!error) {
-                    await router.push('/')
-                }
+                    .then(() => {
+                        if (localStorage.getItem('reservation')) {
+                            return router.push({name: 'reservation'})
+                        }
+                        router.push('/')
+                    }).catch(() => error)
             }
         }
 

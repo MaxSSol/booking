@@ -97,8 +97,8 @@ export default {
         const store = useStore();
         let hiddenMenu = ref(true)
 
-        const isUserLoggedIn = computed(() => store.getters.isUserLoggedIn)
-        const user = computed(() => store.getters.user)
+        const isUserLoggedIn = computed(() => store.getters['user/isUserLoggedIn'])
+        const user = computed(() => store.getters['user/user'])
 
         const showMenu = () => {
             hiddenMenu.value = hiddenMenu.value !== true;

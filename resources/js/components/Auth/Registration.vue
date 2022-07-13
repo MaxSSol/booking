@@ -52,7 +52,7 @@
 import {reactive, computed} from "vue";
 import {useStore} from "vuex";
 import useVuelidate from "@vuelidate/core";
-import {required, email, minLength, sameAs } from "@vuelidate/validators";
+import {required, email, minLength, sameAs} from "@vuelidate/validators";
 
 import AuthInput from "../UI/AuthInput";
 import ActionBtn from "../UI/ActionBtn";
@@ -60,11 +60,11 @@ import router from "../../router";
 
 export default {
     name: "Registration",
-    components: { AuthInput, ActionBtn },
+    components: {AuthInput, ActionBtn},
 
     setup() {
         const store = useStore();
-        let error = computed(() => store.getters.getRegistrationErr)
+        let error = computed(() => store.getters['user/getRegistrationErr'])
         let user = reactive({
             email: '',
             first_name: '',
@@ -77,7 +77,7 @@ export default {
                 email: {required, email},
                 first_name: {required, minLength: minLength(3)},
                 password: {required, minLength: minLength(8)},
-                password_confirmation: {required, sameAsPassword: sameAs(user.password) }
+                password_confirmation: {required, sameAsPassword: sameAs(user.password)}
             }
         })
 
@@ -85,10 +85,19 @@ export default {
 
         const submitForm = async () => {
             v$.value.$validate()
-            if(v$.value.$errors.length === 0) {
-                await store.dispatch('user/registration', user)
-                if (!error) {
-                    await router.push('/')
+            if (v$.value.$errors.length === 0) {
+                try {
+                    await store.dispatch('user/registration', user)
+                        .then(() => {
+                            if (localStorage.getItem('reservation')) {
+                                return router.push({name: 'reservation'})
+                            }
+                            router.push('/')
+                        })
+                        .catch(() => error)
+
+                } catch (error) {
+                    console.log(error)
                 }
             }
         }
