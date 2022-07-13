@@ -20,9 +20,9 @@ class ReservationController extends Controller
 
     public function store(StoreReservationRequest $request)
     {
-        if (!Auth::user()) {
-            return response()->json('Unauthenticated', 401);
-        }
+//        if (!Auth::user()) {
+//            return response()->json('Unauthenticated', 401);
+//        }
 
         $accommodationUnits = $this->reservationService->getAccommodationUnit($request);
         $totalPrice = $this->reservationService->getTotalPrice($request, $accommodationUnits);
@@ -30,12 +30,16 @@ class ReservationController extends Controller
         if (count($accommodationUnits) > 1) {
             $reservation = $this->reservationService->saveAccommodationUnits($accommodationUnits, $totalPrice, $request);
             Auth::user()->notify(new ReservationEmail($accommodationUnits, $totalPrice));
+            $this->reservationService->setIsAvailableFalse($request);
+            $this->reservationService->sendEmailToAccommodationOwner($request);
             return response()->json(['data' => $reservation]);
         }
 
         $reservation = $this->reservationService->saveAccommodationUnit($accommodationUnits, $totalPrice, $request);
         if ($reservation) {
             Auth::user()->notify(new ReservationEmail($accommodationUnits, $totalPrice));
+            $this->reservationService->setIsAvailableFalse($request);
+            $this->reservationService->sendEmailToAccommodationOwner($request);
             return response()->json(['data' => $reservation]);
         }
         return response()->json(['status' => 'error'], 500);

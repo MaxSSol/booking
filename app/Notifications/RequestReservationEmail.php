@@ -7,28 +7,24 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ReservationEmail extends Notification implements ShouldQueue
+class RequestReservationEmail extends Notification implements ShouldQueue
 {
     use Queueable;
-
-    public $accommodationUnits;
-    public $totalPrice;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($accommodationUnits, $totalPrice)
+    public function __construct()
     {
-        $this->accommodationUnits = $accommodationUnits;
-        $this->totalPrice = $totalPrice;
+        //
     }
 
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -39,23 +35,21 @@ class ReservationEmail extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Запит на бронювання успішно створено')
+            ->subject('Запит на бронювання')
             ->greeting('Добрий день!')
-            ->line('Ваш запит на бронювання надіслано власнику, очікуйте підтвердження бронювання.')
-            ->line('Статус бронювання можете перевірити в особистому кабінеті')
-            ->line('Дякуємо що скористались нашим сервісом для бронювання житла!');
+            ->line('З\'явився новий запит на бронювання. Запит можна побачити в особистому кабінеті');
     }
 
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)

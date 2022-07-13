@@ -11,6 +11,7 @@ export default [
         path: '/',
         name: 'home',
         component: HomeView,
+        meta: {guest: false}
     },
     {
         path: '/login',
@@ -34,12 +35,14 @@ export default [
         path: '/accommodation',
         name: 'accommodation',
         component: AccommodationView,
+        meta: {guest: false}
     },
     {
         path: '/accommodation/:id',
         name: 'accommodation-unit',
         component: AccommodationUnitView,
         props: true,
+        meta: {guest: false}
     },
     {
         path: '/reservation',
