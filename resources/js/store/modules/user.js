@@ -29,32 +29,36 @@ export default {
     },
 
     actions: {
-        async login({ commit }, user) {
-            axios.get('/sanctum/csrf-cookie')
-                .then(() =>  {
-                    axios.post('/api/login', user)
-                        .then(res => {
-                            commit('SET_USER', res.data.user)
-                            localStorage.setItem('user', JSON.stringify(res.data.user))
-                        })
-                        .catch(() => {
-                            commit('SET_LOGIN_ERR', true)
-                        })
+        async login({commit}, user) {
+            await axios.get('/sanctum/csrf-cookie')
+            return new Promise((resolve, reject) => {
+                axios.post('/api/login', user)
+                    .then(res => {
+                        commit('SET_USER', res.data.user)
+                        localStorage.setItem('user', JSON.stringify(res.data.user))
+                        resolve(res)
+                    })
+                    .catch((error) => {
+                        commit('SET_LOGIN_ERR', true)
+                        reject(error)
+                    })
             })
         },
 
-        async registration({ commit }, user) {
-            axios.get('/sanctum/csrf-cookie')
-                .then(() => {
-                    axios.post('/api/registration', user)
-                        .then(res => {
-                            commit('SET_USER', res.data.user)
-                            localStorage.setItem('user', JSON.stringify(res.data.user))
-                        })
-                        .catch(() => {
-                            commit('SET_REGISTRATION_ERR', true)
-                        })
-                })
+        async registration({commit}, user) {
+            await axios.get('/sanctum/csrf-cookie')
+            return new Promise((resolve, reject) => {
+                axios.post('/api/registration', user)
+                    .then(res => {
+                        commit('SET_USER', res.data.user)
+                        localStorage.setItem('user', JSON.stringify(res.data.user))
+                        resolve(res)
+                    })
+                    .catch((error) => {
+                        commit('SET_REGISTRATION_ERR', true)
+                        reject(error)
+                    })
+            })
         }
     }
 }

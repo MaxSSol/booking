@@ -7,17 +7,21 @@ const router = createRouter({
     routes
 })
 
-router.beforeEach((to) => {
-    const statusAuth = store.getters.isUserLoggedIn
+router.beforeEach((to, from, next) => {
+    const statusAuth = store.getters['user/isUserLoggedIn']
     const requireAuth = to.matched.some(record => record.meta.auth)
     const requireGuest = to.matched.some(record => record.meta.guest)
 
     if (!statusAuth && requireAuth) {
-        return {name: 'login'}
+        next({name: 'login'})
     }
 
     if (statusAuth && requireGuest) {
-        return {name: 'profile'}
+        next({name: 'profile'})
+    }
+
+    if ((statusAuth || !statusAuth) && !requireGuest) {
+        next()
     }
 
 })
