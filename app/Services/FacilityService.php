@@ -13,7 +13,7 @@ class FacilityService
     {
         return Facility::withCount(['accommodationUnits' => function($query) use ($filter) {
             $query->whereHas('accommodation', function (Builder $query) use ($filter) {
-                $query->filter($filter);
+                $query->where('is_available', true)->filter($filter);
             });
         }])->get();
     }
