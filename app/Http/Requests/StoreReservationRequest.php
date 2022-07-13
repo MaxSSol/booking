@@ -13,7 +13,7 @@ class StoreReservationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,10 +26,10 @@ class StoreReservationRequest extends FormRequest
         return [
             'rent_date_from' => 'required|string',
             'rent_date_to' => 'required|string',
-            'comment' => 'string|max:1024',
-            'number_of_people' => 'required|string',
+            'comment' => 'string|max:1024|nullable',
+            'number_of_people' => 'required',
             'accommodation_unit_id' => 'required|array',
-            'payment_method_id' => 'required|string'
+            'payment_method_id' => 'required'
         ];
     }
 }

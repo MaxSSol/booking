@@ -61,7 +61,9 @@ class AccommodationService
         return Accommodation::with(
             [
                 'accommodationUnits' => function ($query) use ($filter) {
-                    $query->filter($filter)->with('facilities:id,title', 'accommodationUnitImages');
+                    $query->filter($filter)
+                        ->where('is_available', true)
+                        ->with('facilities:id,title', 'accommodationUnitImages');
                 },
                 'city',
                 'opportunities:id,title',
