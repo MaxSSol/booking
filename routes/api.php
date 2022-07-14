@@ -38,6 +38,7 @@ Route::apiResources([
     'stars' => \App\Http\Controllers\Api\StarController::class,
     'reservations' => \App\Http\Controllers\Api\ReservationController::class,
     'units' => \App\Http\Controllers\Api\AccommodationUnitController::class,
+    'user/histories' => \App\Http\Controllers\Api\UserRentHistoryController::class
 ]);
 
 Route::get('/payment', '\App\Http\Controllers\Api\AccommodationPaymentMethodController');

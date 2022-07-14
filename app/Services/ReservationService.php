@@ -61,7 +61,7 @@ class ReservationService
     public function sendEmailToAccommodationOwner($request)
     {
         $accommodationUnit = AccommodationUnit::whereIn('id', $request->accommodation_unit_id)->first();
-        $accommodationUnit->accommodation->user->notify(new RequestReservationEmail());
+        $accommodationUnit->user->notify(new RequestReservationEmail());
     }
 
     public function setIsAvailableFalse($request)

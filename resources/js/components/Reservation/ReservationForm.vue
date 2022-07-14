@@ -75,7 +75,6 @@ import ReservationUser from "./ReservationUser";
 import ReservationInfo from "./ReservationInfo";
 import {ref, computed} from "vue";
 import {useStore} from "vuex";
-import router from "../../router";
 
 export default {
     name: "ReservationForm",
@@ -111,7 +110,7 @@ export default {
                         loading.value = false
                         alert('Бронювання створено. Повідомлення про бронювання відправлено на електронну адресу.')
                         localStorage.removeItem('reservation')
-                        router.push({name: 'profile'})
+                        window.location.reload()
                     })
                     .catch(() => {
                         error.value = true

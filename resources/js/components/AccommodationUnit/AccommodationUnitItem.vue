@@ -65,14 +65,14 @@ export default {
         const store = useStore()
         let reservation = ref(false)
         const addToReservation = (id, price) => {
-            store.commit('accommodationUnit/SET_RESERVATION_UNIT', id)
-            store.commit('accommodationUnit/SET_RESERVATION_PRICE', price)
+            store.commit('reservation/SET_RESERVATION_UNIT', id)
+            store.commit('reservation/SET_RESERVATION_PRICE', price)
             reservation.value = true
         }
 
         const removeFromReservation = (id, price) => {
-            store.commit('accommodationUnit/REMOVE_RESERVATION_UNIT', id)
-            store.commit('accommodationUnit/REMOVE_RESERVATION_PRICE', price)
+            store.commit('reservation/REMOVE_RESERVATION_UNIT', id)
+            store.commit('reservation/REMOVE_RESERVATION_PRICE', price)
             reservation.value = false
         }
 

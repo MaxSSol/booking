@@ -26,8 +26,6 @@
             </div>
         </div>
         <div class="mt-6 room-images flex flex-col items-center w-full">
-            <img id="featured" class="w-full h-full lg:h-4/5 lg:w-4/5 cursor-pointer object-fit px-2"/>
-
             <div class="thumbnails w-full lg:w-2/3 px-2 flex items-center justify-around">
                 <accommodation-images :images="accommodation.accommodation_images"></accommodation-images>
             </div>
@@ -163,11 +161,11 @@ export default {
     },
     setup() {
         const store = useStore()
-        let reservation = computed(() => store.getters['accommodationUnit/getReservationUnits'])
-        let totalPrice = computed(() => store.getters['accommodationUnit/getReservationPrice'])
+        let reservation = computed(() => store.getters['reservation/getReservationUnits'])
+        let totalPrice = computed(() => store.getters['reservation/getReservationPrice'])
 
         const addReservation = () => {
-            localStorage.setItem('reservation',JSON.stringify(reservation.value))
+            localStorage.setItem('reservation', JSON.stringify(reservation.value))
             router.push('/reservation')
         }
 

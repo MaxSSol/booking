@@ -75,11 +75,12 @@ class AccommodationService
 
     public function getAccommodationTotalRatingById($id)
     {
-        $totalRating = AccommodationComment::where('accommodation_id', $id)->avg('total_rating');
-        $facilities = AccommodationComment::where('accommodation_id', $id)->avg('facilities');
-        $location = AccommodationComment::where('accommodation_id', $id)->avg('location');
-        $service = AccommodationComment::where('accommodation_id', $id)->avg('service');
-        $price = AccommodationComment::where('accommodation_id', $id)->avg('price');
+        $accommodation = AccommodationComment::where('accommodation_id', $id);
+        $totalRating = $accommodation->avg('total_rating');
+        $facilities = $accommodation->avg('facilities');
+        $location = $accommodation->avg('location');
+        $service = $accommodation->avg('service');
+        $price = $accommodation->avg('price');
 
         return [
             'total_rating' => $totalRating,

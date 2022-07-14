@@ -10,7 +10,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class StarController extends Controller
 {
-    public StarService $starService;
+    protected StarService $starService;
 
     public function __construct(StarService $starService)
     {

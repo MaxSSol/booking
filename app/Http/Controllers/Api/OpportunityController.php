@@ -14,7 +14,7 @@ class OpportunityController extends Controller
     /**
      * @var OpportunityService
      */
-    public OpportunityService $opportunityService;
+    protected OpportunityService $opportunityService;
 
     /**
      * @param OpportunityService $opportunityService
