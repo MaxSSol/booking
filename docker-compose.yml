@@ -7,6 +7,9 @@ services:
             dockerfile: docker/fpm/Dockerfile
         volumes:
             - ./:/var/www/html
+            - ./docker/fpm/conf.d/php.ini:/usr/local/etc/php/php.ini
+            - ./docker/fpm/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
+
         links:
             -   mysql
         restart: unless-stopped
