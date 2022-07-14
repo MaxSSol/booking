@@ -64,13 +64,13 @@
                         </router-link>
                     </li>
                     <li v-if="isUserLoggedIn">
-                        <a href="#"
+                        <router-link :to="{name: 'profile'}"
                                      class="block hover:text-blue-700 lg:mr-2
                                      text-base lg:text-xl py-2 lg:py-0 border-b-2
                                      lg:border-b-0"
                         >
                             {{ user.first_name }}
-                        </a>
+                        </router-link>
                     </li>
                     <li v-if="isUserLoggedIn">
                         <button @click="logout"
