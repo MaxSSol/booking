@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 
 class AccommodationController extends Controller
 {
-    public AccommodationService $accommodationService;
+    protected AccommodationService $accommodationService;
 
     /**
      * @param AccommodationService $accommodationService

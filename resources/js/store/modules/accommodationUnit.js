@@ -9,8 +9,6 @@ export default {
         isLoaded: false,
         totalRating: 0,
         countComments: 0,
-        reservationUnits: [],
-        reservationPrice: [],
     },
     getters: {
         getAccommodationUnits: state => state.accommodationUnits,
@@ -18,8 +16,6 @@ export default {
         getError: state => state.error,
         getTotalRating: state => state.totalRating,
         getCountComments: state => state.countComments,
-        getReservationUnits: state => state.reservationUnits,
-        getReservationPrice: state => state.reservationPrice.reduce((p, i) => p + i, 0)
     },
     mutations: {
         SET_ACCOMMODATION_UNITS(state, accommodationUnits) {
@@ -40,24 +36,8 @@ export default {
 
         SET_COUNT_COMMENTS(state, count) {
             state.countComments = count
-        },
-
-        SET_RESERVATION_UNIT(state, accommodationUnitId) {
-            state.reservationUnits.push(accommodationUnitId)
-        },
-
-        REMOVE_RESERVATION_UNIT(state, accommodationUnitId) {
-            state.reservationUnits = state.reservationUnits.filter(u => u !== accommodationUnitId)
-        },
-
-        SET_RESERVATION_PRICE(state, price) {
-            state.reservationPrice.push(price)
-        },
-
-        REMOVE_RESERVATION_PRICE(state, price) {
-            console.log(price)
-            state.reservationPrice = state.reservationPrice.filter(p => p !== price)
         }
+
     },
     actions: {
         fetchAccommodationUnits({commit}, id, searchParams) {

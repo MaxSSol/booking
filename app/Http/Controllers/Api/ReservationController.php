@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
-    public ReservationService $reservationService;
+    protected ReservationService $reservationService;
 
     public function __construct(ReservationService $reservationService)
     {
@@ -20,9 +20,9 @@ class ReservationController extends Controller
 
     public function store(StoreReservationRequest $request)
     {
-//        if (!Auth::user()) {
-//            return response()->json('Unauthenticated', 401);
-//        }
+        if (!Auth::user()) {
+            return response()->json('Unauthenticated', 401);
+        }
 
         $accommodationUnits = $this->reservationService->getAccommodationUnit($request);
         $totalPrice = $this->reservationService->getTotalPrice($request, $accommodationUnits);

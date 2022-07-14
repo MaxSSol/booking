@@ -27,8 +27,8 @@ class RentHistory extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function accommodation(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function accommodationUnit(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Accommodation::class);
+        return $this->belongsTo(AccommodationUnit::class);
     }
 }

@@ -31,6 +31,32 @@ class AccommodationUnit extends Model
 
     public function user()
     {
-        $this->hasOneThrough(User::class,Accommodation::class, 'id', 'accommodation_id',   'id', 'id' );
+        return $this
+            ->hasOneThrough(
+                User::class,
+                Accommodation::class,
+                'id',
+                'id',
+                'accommodation_id',
+                'user_id'
+            );
+    }
+
+    public function rentHistories(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(RentHistory::class);
+    }
+
+    public function city()
+    {
+        return $this
+            ->hasOneThrough(
+                City::class,
+                Accommodation::class,
+                'id',
+                'id',
+                'accommodation_id',
+                'city_id'
+            );
     }
 }

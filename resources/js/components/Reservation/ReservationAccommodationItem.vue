@@ -54,7 +54,6 @@ export default {
         store.commit('reservation/SET_TOTAL_PRICE', totalPrice)
 
         const removeReservation = (id) => {
-            console.log(id)
             let ids = JSON.parse(localStorage.getItem('reservation'))
             if (ids.length > 1) {
                 ids = ids.filter(i => i !== id)
@@ -65,6 +64,8 @@ export default {
 
             if (ids.length === 1) {
                 localStorage.removeItem('reservation')
+                store.commit('reservation/REMOVE_RESERVATION_UNIT', id)
+                store.commit('reservation/REMOVE_TOTAL_PRICE', totalPrice)
                 router.push({name: 'home'})
             }
         }

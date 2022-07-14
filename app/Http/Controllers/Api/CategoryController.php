@@ -15,7 +15,7 @@ class CategoryController extends Controller
     /**
      * @var CategoryService
      */
-    public CategoryService $categoryService;
+    protected CategoryService $categoryService;
 
     /**
      * @param CategoryService $categoryService

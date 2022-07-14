@@ -9,6 +9,8 @@ export default {
         accommodationUnits: [],
         totalPrice: [],
         isReservationSuccess: false,
+        reservationUnits: [],
+        reservationPrice: [],
     },
 
     getters: {
@@ -16,7 +18,9 @@ export default {
         getFetchErr: state => state.fetchErr,
         getAccommodationUnits: state => state.accommodationUnits,
         getTotalPrice: state => state.totalPrice.reduce((p, i) => p + i, 0),
-        getReservationStatus: state => state.isReservationSuccess
+        getReservationStatus: state => state.isReservationSuccess,
+        getReservationUnits: state => state.reservationUnits,
+        getReservationPrice: state => state.reservationPrice.reduce((p, i) => p + i, 0)
     },
 
     mutations: {
@@ -42,6 +46,22 @@ export default {
 
         SET_IS_RESERVATION_SUCCESS(state, status) {
             state.isReservationSuccess = status
+        },
+
+        SET_RESERVATION_UNIT(state, accommodationUnitId) {
+            state.reservationUnits.push(accommodationUnitId)
+        },
+
+        REMOVE_RESERVATION_UNIT(state, accommodationUnitId) {
+            state.reservationUnits = state.reservationUnits.filter(u => u !== accommodationUnitId)
+        },
+
+        SET_RESERVATION_PRICE(state, price) {
+            state.reservationPrice.push(price)
+        },
+
+        REMOVE_RESERVATION_PRICE(state, price) {
+            state.reservationPrice = state.reservationPrice.filter(p => p !== price)
         }
     },
 

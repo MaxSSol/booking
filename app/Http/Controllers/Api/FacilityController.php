@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class FacilityController extends Controller
 {
-    public FacilityService $facilityService;
+    protected FacilityService $facilityService;
 
     public function __construct(FacilityService $facilityService)
     {
