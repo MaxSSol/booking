@@ -8,6 +8,7 @@ import opportunity from "./modules/opportunity";
 import star from "./modules/star"
 import accommodationUnit from "./modules/accommodationUnit";
 import reservation from "./modules/reservation";
+import rentHistory from "./modules/rentHistory";
 
 export default createStore({
     modules: {
@@ -20,5 +21,6 @@ export default createStore({
         star,
         accommodationUnit,
         reservation,
+        rentHistory,
     }
 })
