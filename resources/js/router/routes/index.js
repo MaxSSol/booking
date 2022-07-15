@@ -5,6 +5,7 @@ import ProfileView from "../../views/ProfileView";
 import AccommodationView from "../../views/AccommodationView";
 import AccommodationUnitView from "../../views/AccommodationUnitsView"
 import ReservationView from "../../views/ReservationView";
+import UserSettingView from "../../views/UserSettingView";
 
 export default [
     {
@@ -49,5 +50,11 @@ export default [
         name: 'reservation',
         component: ReservationView,
         meta: { auth: true }
+    },
+    {
+        path: '/user/settings',
+        name: 'user/settings',
+        component: UserSettingView,
+        meta: {auth: true}
     }
 ]

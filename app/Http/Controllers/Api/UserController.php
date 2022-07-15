@@ -19,25 +19,18 @@ class UserController extends Controller
         $this->middleware('auth:sanctum');
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        return $request->user();
+        return response()->json(['user' => Auth::user()]);
     }
 
     public function update($id, UpdateUserRequest $request)
     {
-        $user = Auth::user();
         $validated = collect($request->validated());
-        
-        if ($request->hasFile('image')) {
-            $image = $this->userService->updateImage($user, $request);
-            $validated['image'] = $image;
-        }
-        $validated->forget('deleteImage');
 
         $user = User::findOrFail(Auth::user()->id);
         $user->update($validated->all());
 
-        return response()->json(Auth::user());
+        return response()->json(['user' => Auth::user()]);
     }
 }
