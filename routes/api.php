@@ -14,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::post('/login', '\App\Http\Controllers\Auth\LoginController@authentication');
 Route::delete('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::post('/registration', '\App\Http\Controllers\Auth\RegistrationController');
@@ -38,7 +34,8 @@ Route::apiResources([
     'stars' => \App\Http\Controllers\Api\StarController::class,
     'reservations' => \App\Http\Controllers\Api\ReservationController::class,
     'units' => \App\Http\Controllers\Api\AccommodationUnitController::class,
-    'user/histories' => \App\Http\Controllers\Api\UserRentHistoryController::class
+    'user/histories' => \App\Http\Controllers\Api\UserRentHistoryController::class,
+    'users' => \App\Http\Controllers\Api\UserController::class,
 ]);
 
 Route::get('/payment', '\App\Http\Controllers\Api\AccommodationPaymentMethodController');
