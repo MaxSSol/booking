@@ -5,6 +5,7 @@ export default {
         user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
         loginErr: '',
         registrationErr: '',
+        fetchErr: false,
     },
 
     getters: {
@@ -26,9 +27,20 @@ export default {
         SET_REGISTRATION_ERR(state, err) {
             state.registrationErr = err
         },
+
+        SET_ERR_FETCH(state, status) {
+            state.fetchErr = status
+        }
     },
 
     actions: {
+        async fetchUser({commit}) {
+            axios.get('/api/users')
+                .then(res => {
+                    localStorage.setItem('user', JSON.stringify(res.data.user))
+                    commit('SET_USER', res.data.user)
+                })
+        },
         async login({commit}, user) {
             await axios.get('/sanctum/csrf-cookie')
             return new Promise((resolve, reject) => {
@@ -59,6 +71,19 @@ export default {
                         reject(error)
                     })
             })
+        },
+
+        updateUserInformation({ state, commit }, userData) {
+            axios.put('/api/users/' + state.user.id, userData, {
+                header: {
+                    "Content-Type": "multipart/form-data",
+                }
+            })
+                .then(res => {
+                    commit('SET_USER', res.data.user)
+                    localStorage.setItem('user', JSON.stringify(res.data.user))
+                })
+                .catch(() => commit('SET_ERR_FETCH', true))
         }
     }
 }

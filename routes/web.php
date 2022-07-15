@@ -13,4 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{any}', '\App\Http\Controllers\MainController')->where('any', '.*');
+Route::get('/{any}', '\App\Http\Controllers\MainController')->where('any', '^(?!storage).*$');

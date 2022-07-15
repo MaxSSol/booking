@@ -28,15 +28,13 @@ class UpdateUserRequest extends FormRequest
         return [
             'first_name' => 'string|max:50',
             'last_name' => 'string|max:50',
-            'password' => [Password::min(8)->letters()->mixedCase()->numbers()->symbols()],
-            'password_confirmation' => 'required_id:password|same:password',
-            'tel_num' => 'string|regex:/^([+]{0,1}380)\d{9}$/',
-            'birth_date' => 'date',
-            'sex' => [Rule::in(['male', 'female'])],
-            'country' => 'string|max:70',
-            'city' => 'string|max:70',
-            'image' => 'image|mimes:jpeg,png,jpg|max:4096',
-            'deleteImage' => 'boolean'
+            'password' => [Password::min(8)->letters()->mixedCase()->numbers()->symbols(), 'nullable'],
+            'password_confirmation' => 'same:password',
+            'tel_num' => 'string|regex:/^([+]{0,1}380)\d{9}$/|nullable',
+            'birth_date' => 'date|nullable',
+            'sex' => [Rule::in(['male', 'female']), 'nullable'],
+            'country' => 'string|max:70|nullable',
+            'city' => 'string|max:70|nullable'
         ];
     }
 

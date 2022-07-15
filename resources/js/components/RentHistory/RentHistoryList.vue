@@ -1,5 +1,5 @@
 <template>
-    <div v-if="rentHistories.length < 0">
+    <div v-if="rentHistories.length === 0">
         <p class="text-4xl font-bold">У вас немає бронювань</p>
     </div>
     <div v-else>
