@@ -45,6 +45,7 @@ class UserAccommodationService
     {
         $accommodation = Accommodation::with(
             'accommodationImages',
+            'accommodationUnits',
             'city',
             'categories',
             'opportunities',
