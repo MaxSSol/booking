@@ -24,6 +24,7 @@ class StoreRentInfoRequest extends FormRequest
     public function rules()
     {
         return [
+            'title' => 'required|string',
             'rent_for_short_term' => 'required|integer',
             'rent_for_long_term' => 'required|integer',
             'free_termination' => 'required|boolean',
