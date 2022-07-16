@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Filters\AccommodationFilter;
 use App\Filters\AccommodationUnitFilter;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Filters\AccommodationFilterRequest;
 use App\Http\Resources\AccommodationResource;
-use App\Models\Accommodation;
 use App\Services\AccommodationService;
 use Illuminate\Http\Request;
 
@@ -44,11 +42,11 @@ class AccommodationController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**

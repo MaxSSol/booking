@@ -36,6 +36,8 @@ Route::apiResources([
     'units' => \App\Http\Controllers\Api\AccommodationUnitController::class,
     'user/histories' => \App\Http\Controllers\Api\UserRentHistoryController::class,
     'users' => \App\Http\Controllers\Api\UserController::class,
+    'user/payment/methods' => \App\Http\Controllers\Api\UserPaymentMethodController::class,
+    'user/accommodation' => \App\Http\Controllers\Api\UserAccommodationController::class
 ]);
 
 

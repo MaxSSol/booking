@@ -63,7 +63,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function paymentMethods(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(PaymentMethod::class);
+        return $this->belongsToMany(PaymentMethod::class)->withPivot(['bill_number']);
     }
 
     public function accommodation(): \Illuminate\Database\Eloquent\Relations\HasMany
