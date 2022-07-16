@@ -45,4 +45,9 @@ Route::group(['prefix' => 'user/image'], function() {
    Route::post('/upload','\App\Http\Controllers\UserImageController@upload');
    Route::post('/delete', '\App\Http\Controllers\UserImageController@delete');
 });
+
+Route::group(['prefix' => 'accommodation/image'], function() {
+    Route::post('/upload/{id}', '\App\Http\Controllers\AccommodationImageController@upload');
+    Route::post('/delete', '\App\Http\Controllers\AccommodationImageController@delete');
+});
 Route::get('/payment', '\App\Http\Controllers\Api\AccommodationPaymentMethodController');
