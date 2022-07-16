@@ -7,6 +7,24 @@
         <p class="text-sm mt-4">Додайте свої правила оренди.</p>
         <div class="rent-info-form">
             <div class="mt-2">
+                <label for="title"
+                       class="block mb-2 text-base font-medium text-gray-900"
+                >
+                    Назва шаблону
+                </label>
+                <input type="text"
+                       id="title"
+                       class="bg-gray-50 border border-gray-300 text-gray-900
+                                text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500
+                                block w-full p-2.5"
+                       v-model="v$.title.$model"
+                       placeholder="Мій шаблон №1"
+                >
+                <p class="text-red-600 text-sm font-bold" v-show="v$.title.$error">
+                    Обов'язкове для заповнення.
+                </p>
+            </div>
+            <div class="mt-2">
                 <label for="min-rent"
                        class="block mb-2 text-base font-medium text-gray-900"
                 >
@@ -90,6 +108,7 @@ export default {
         const store = useStore()
 
         const rentRules = reactive({
+            title: '',
             rent_for_short_term: 1,
             rent_for_long_term: 2,
             free_termination: true,
@@ -98,6 +117,7 @@ export default {
 
         const rules = computed(() => {
             return {
+                title: {required},
                 rent_for_short_term: {required, minValue: minValue(1)},
                 rent_for_long_term: {required, minValue: minValue(2)},
                 leave_termination_price: {requiredIf: requiredIf(rentRules.free_termination === false)}
