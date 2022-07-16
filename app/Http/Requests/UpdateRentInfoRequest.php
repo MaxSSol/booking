@@ -24,6 +24,7 @@ class UpdateRentInfoRequest extends FormRequest
     public function rules()
     {
         return [
+            'title' => 'string',
             'rent_for_short_term' => 'integer',
             'rent_for_long_term' => 'integer',
             'free_termination' => 'boolean',
