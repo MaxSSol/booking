@@ -27,7 +27,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'first_name' => 'string|max:50',
-            'last_name' => 'string|max:50',
+            'last_name' => 'string|max:50|nullable',
             'password' => [Password::min(8)->letters()->mixedCase()->numbers()->symbols(), 'nullable'],
             'password_confirmation' => 'same:password',
             'tel_num' => 'string|regex:/^([+]{0,1}380)\d{9}$/|nullable',
@@ -47,10 +47,7 @@ class UpdateUserRequest extends FormRequest
             'password' => 'Пароль має складатися мінімум з 8 символів, містить
                            літери у верхньому та нижньому регистрі, цифри та символи',
             'tel_num.regex' => 'Має починатися з +380',
-            'birth_date' => 'Дата народження',
-            'image.image' => 'Файл має бути фотографією',
-            'image.mimes' => 'Фотографія повинна бути в одному із форматів: jpeg, png, jpg.',
-            'image.max' => 'Максимальний розмір: 4 МБ',
+            'birth_date' => 'Дата народження'
         ];
     }
 }

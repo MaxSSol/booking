@@ -38,4 +38,9 @@ Route::apiResources([
     'users' => \App\Http\Controllers\Api\UserController::class,
 ]);
 
+
+Route::group(['prefix' => 'user/image'], function() {
+   Route::post('/upload','\App\Http\Controllers\UserImageController@upload');
+   Route::post('/delete', '\App\Http\Controllers\UserImageController@delete');
+});
 Route::get('/payment', '\App\Http\Controllers\Api\AccommodationPaymentMethodController');

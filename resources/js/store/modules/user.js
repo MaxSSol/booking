@@ -73,7 +73,7 @@ export default {
             })
         },
 
-        updateUserInformation({ state, commit }, userData) {
+        updateUserInformation({state, commit}, userData) {
             axios.put('/api/users/' + state.user.id, userData, {
                 header: {
                     "Content-Type": "multipart/form-data",
@@ -84,6 +84,36 @@ export default {
                     localStorage.setItem('user', JSON.stringify(res.data.user))
                 })
                 .catch(() => commit('SET_ERR_FETCH', true))
+        },
+
+        uploadUserImage({commit}, image) {
+            return new Promise((resolve, reject) => {
+                axios.post('/api/user/image/upload', image)
+                    .then(res => {
+                        commit('SET_USER', res.data.user)
+                        localStorage.setItem('user', JSON.stringify(res.data.user))
+                        resolve()
+                    })
+                    .catch((error) => {
+                        commit('SET_ERR_FETCH', true)
+                        reject(error.response.data.errors)
+                    })
+            })
+        },
+
+        deleteUserImage({commit}) {
+            return new Promise((resolve, reject) => {
+                axios.post('/api/user/image/delete')
+                    .then(res => {
+                        commit('SET_USER', res.data.user)
+                        localStorage.setItem('user', JSON.stringify(res.data.user))
+                        resolve()
+                    })
+                    .catch(() => {
+                        commit('SET_ERR_FETCH', true)
+                        reject()
+                    })
+            })
         }
     }
 }

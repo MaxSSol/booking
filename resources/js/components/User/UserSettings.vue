@@ -9,8 +9,8 @@
                                    :title="'Ім\'я'"
                                    :name="'first_name'"
                     />
-                    <p class="text-red-600 text-sm font-bold" v-show="v$.first_name.$error">
-                        Максимальна довжина 70 символів.
+                    <p class="text-red-600 text-sm font-bold" v-show="v$.first_name.$errors[0]">
+                        Дане поле є обов'язковим. Максимальна довжина 70 символів.
                     </p>
                     <setting-input v-model="v$.last_name.$model"
                                    :title="'Прізвище'"
@@ -82,28 +82,6 @@
                     <p class="text-red-600 text-sm font-bold" v-show="v$.password_confirmation.$error">
                         Паролі повинні співпадати.
                     </p>
-                    <div v-if="user.image">
-                        <p class="text-base">Зображення:</p>
-                        <div class="flex flex-row justify-between items-center">
-                            <img :src="'/storage/users/' + user.image"
-                                 class="w-[80px] h-[80px] rounded-full"
-                                 alt="Зображення"
-                            />
-                            <button class="font-bold text-white py-2 px-8 bg-blue-700 hover:opacity-50">
-                                Змінити
-                            </button>
-                        </div>
-                    </div>
-                    <div v-else>
-                        <p class="text-base">Зображення:</p>
-                        <div class="flex flex-row justify-between items-center">
-                         <p class="text-base">У вас немає зображення</p>
-                        <button class="font-bold text-white py-2 px-8 bg-blue-700 hover:opacity-50"
-                        >
-                            Додати зображення
-                        </button>
-                        </div>
-                    </div>
                     <div class="mt-4 text-center">
                         <button @click="submitForm"
                                 class="font-bold text-white py-2 px-8 bg-blue-900 hover:opacity-50"
@@ -123,7 +101,7 @@ import {computed, ref, reactive} from "vue";
 import SettingInput from "../UI/SettingInput";
 import router from "../../router";
 import {useVuelidate} from "@vuelidate/core";
-import {requiredIf, email, minLength, sameAs, maxLength} from "@vuelidate/validators";
+import {requiredIf, email, minLength, sameAs, maxLength, required} from "@vuelidate/validators";
 import {ukTelNum} from "../../helpers/validators";
 
 export default {
@@ -137,12 +115,11 @@ export default {
             ...store.state.user.user,
             password: '',
             password_confirmation: '',
-            deleteImage: false
         })
 
         const rules = computed(() => {
             return {
-                first_name: {maxLength: maxLength(70)},
+                first_name: { required, maxLength: maxLength(70)},
                 last_name: {maxLength: maxLength(70)},
                 tel_num: {ukTelNum},
                 email: {email},
@@ -167,6 +144,7 @@ export default {
                 router.push({name: 'profile'})
             }
         }
+
 
         return {
             user,
