@@ -8,11 +8,27 @@ use App\Filters\Filterable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AccommodationUnit extends Model
 {
     use HasFactory;
     use Filterable;
+    use SoftDeletes;
+
+    protected $fillable = [
+        'title',
+        'description',
+        'number_of_rooms',
+        'number_of_floors',
+        'square',
+        'max_count_people',
+        'price',
+        'is_available',
+        'date_available_from',
+        'accommodation_id',
+        'rent_info_id'
+    ];
 
     public function accommodation(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

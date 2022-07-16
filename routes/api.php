@@ -36,6 +36,10 @@ Route::apiResources([
     'units' => \App\Http\Controllers\Api\AccommodationUnitController::class,
     'user/histories' => \App\Http\Controllers\Api\UserRentHistoryController::class,
     'users' => \App\Http\Controllers\Api\UserController::class,
+    'user/payment/methods' => \App\Http\Controllers\Api\UserPaymentMethodController::class,
+    'user/accommodation' => \App\Http\Controllers\Api\UserAccommodationController::class,
+    'user/units' => \App\Http\Controllers\Api\UserAccommodationUnitController::class,
+    'user/rent' => \App\Http\Controllers\Api\RentInfoController::class,
 ]);
 
 
@@ -43,4 +47,15 @@ Route::group(['prefix' => 'user/image'], function() {
    Route::post('/upload','\App\Http\Controllers\UserImageController@upload');
    Route::post('/delete', '\App\Http\Controllers\UserImageController@delete');
 });
+
+Route::group(['prefix' => 'accommodation/image'], function() {
+    Route::post('/upload/{id}', '\App\Http\Controllers\AccommodationImageController@upload');
+    Route::post('/delete', '\App\Http\Controllers\AccommodationImageController@delete');
+});
+
+Route::group(['prefix' => 'accommodation/units/image'], function() {
+    Route::post('/upload/{id}', '\App\Http\Controllers\AccommodationUnitImageController@upload');
+    Route::post('/delete', '\App\Http\Controllers\AccommodationUnitImageController@delete');
+});
+
 Route::get('/payment', '\App\Http\Controllers\Api\AccommodationPaymentMethodController');

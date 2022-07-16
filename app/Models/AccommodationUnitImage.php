@@ -9,6 +9,12 @@ class AccommodationUnitImage extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'accommodation_unit_id',
+        'image',
+        'order'
+    ];
+
     public function accommodationUnits(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(AccommodationUnit::class);

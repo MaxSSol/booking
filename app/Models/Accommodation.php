@@ -5,13 +5,26 @@ namespace App\Models;
 use App\Filters\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Accommodation extends Model
 {
     use HasFactory;
     use Filterable;
+    use SoftDeletes;
 
     protected $table = 'accommodation';
+
+    protected $fillable = [
+        'title',
+        'description',
+        'number_of_rooms',
+        'number_of_floors',
+        'address',
+        'city_id',
+        'star_id',
+        'user_id',
+    ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
