@@ -9,6 +9,9 @@ import star from "./modules/star"
 import accommodationUnit from "./modules/accommodationUnit";
 import reservation from "./modules/reservation";
 import rentHistory from "./modules/rentHistory";
+import paymentMethod from "./modules/paymentMethod"
+import quest from "./modules/quest";
+import rentInfo from "./modules/rentInfo"
 
 export default createStore({
     modules: {
@@ -22,5 +25,8 @@ export default createStore({
         accommodationUnit,
         reservation,
         rentHistory,
+        paymentMethod,
+        quest,
+        rentInfo
     }
 })

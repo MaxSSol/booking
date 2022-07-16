@@ -24,7 +24,7 @@ class StoreUserPaymentMethodRequest extends FormRequest
     public function rules()
     {
         return [
-            'payment_method_id' => 'required|string',
+            'payment_method_id' => 'required|integer',
             'bill_number' => 'required|string'
         ];
     }

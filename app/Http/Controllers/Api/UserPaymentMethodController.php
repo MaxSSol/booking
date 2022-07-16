@@ -11,12 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class UserPaymentMethodController extends Controller
 {
-    protected $user;
-
     public function __construct()
     {
         $this->middleware('auth:sanctum');
-        $this->user = User::findOrFail(Auth::user()->id);
     }
 
     /**
@@ -26,7 +23,8 @@ class UserPaymentMethodController extends Controller
      */
     public function index()
     {
-        return UserPaymentMethodResource::collection($this->user->paymentMethods);
+        $user = User::findOrFail(Auth::user()->id);
+        return UserPaymentMethodResource::collection($user->paymentMethods);
     }
 
     /**
@@ -38,8 +36,8 @@ class UserPaymentMethodController extends Controller
     public function store(StoreUserPaymentMethodRequest $request)
     {
         $validated = collect($request->validated());
-
-        $this->user
+        $user = User::findOrFail(Auth::user()->id);
+        $user
             ->paymentMethods()
             ->syncWithoutDetaching(
                 [$validated->get('payment_method_id') =>
@@ -49,7 +47,7 @@ class UserPaymentMethodController extends Controller
                 ]
             );
 
-        return UserPaymentMethodResource::collection($this->user->paymentMethods);
+        return UserPaymentMethodResource::collection($user->paymentMethods);
     }
 
     public function show($id)
@@ -67,15 +65,15 @@ class UserPaymentMethodController extends Controller
     public function update(UpdateUserPaymentMethodRequest $request, $id)
     {
         $validated = collect($request->validated());
-
-        $this->user
+        $user = User::findOrFail(Auth::user()->id);
+        $user
             ->paymentMethods()
             ->updateExistingPivot(
                 $validated->get('payment_method_id'),
                 ['bill_number' => $validated->get('bill_number')]
             );
 
-        return UserPaymentMethodResource::collection($this->user->paymentMethods);
+        return UserPaymentMethodResource::collection($user->paymentMethods);
     }
 
     /**
@@ -86,7 +84,8 @@ class UserPaymentMethodController extends Controller
      */
     public function destroy($id)
     {
-        $this->user->paymentMethods()->detach($id);
-        return UserPaymentMethodResource::collection($this->user->paymentMethods);
+        $user = User::findOrFail(Auth::user()->id);
+        $user->paymentMethods()->detach($id);
+        return UserPaymentMethodResource::collection($user->paymentMethods);
     }
 }
