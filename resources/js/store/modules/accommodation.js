@@ -66,6 +66,16 @@ export default {
                     commit('SET_LOADED', true);
                 })
                 .catch(() => commit('SET_ERROR', true))
+        },
+        addAccommodation({commit}, accommodation) {
+            return new Promise((resolve, reject) => {
+                axios.post('/api/user/accommodation', accommodation)
+                    .then(res => {
+                        commit('SET_ACCOMMODATION', res.data.accommodation)
+                        resolve()
+                    })
+                    .catch(() => reject())
+            })
         }
     }
 }

@@ -5,7 +5,7 @@
                 <label for="title"
                        class="block mb-2 text-base font-medium text-gray-900"
                 >
-                    Назва помешкання
+                    Назва житла
                 </label>
                 <input type="text"
                        id="title"
@@ -28,7 +28,7 @@
                               bg-gray-50 rounded-lg border
                               border-gray-300 focus:ring-blue-500
                               focus:border-blue-500"
-                          placeholder="Побажання..."
+                          placeholder="Опис..."
                           v-model="v$.description.$model"
                 >
                 </textarea>
@@ -71,6 +71,21 @@
                 </p>
             </div>
             <div class="mt-2">
+                <label for="cities" class="block mb-2 text-base font-medium text-gray-900 dark:text-gray-400">
+                    Оберіть містознаходження
+                </label>
+                <VueMultiselect
+                    v-model="v$.city_id.$model"
+                    :options="cities"
+                    placeholder="Оберіть містознаходження"
+                    label="title"
+                    track-by="id"
+                ></VueMultiselect>
+                <p class="text-red-600 text-sm font-bold" v-show="v$.city_id.$error">
+                    Обов'язкове для заповнення.
+                </p>
+            </div>
+            <div class="mt-2">
                 <label for="address"
                        class="block mb-2 text-base font-medium text-gray-900"
                 >
@@ -88,71 +103,71 @@
                 </p>
             </div>
             <div class="mt-2">
-                <label for="countries_multiple" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Оберіть
-                    зручності</label>
-                <select multiple id="countries_multiple"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected>Choose countries</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="FR">France</option>
-                    <option value="DE">Germany</option>
-                </select>
-            </div>
-            <div class="mt-2">
-                <label for="countries_multiple" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Оберіть
-                    тип помешкання</label>
-                <select multiple id="categories"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected>Choose countries</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="FR">France</option>
-                    <option value="DE">Germany</option>
-                </select>
-            </div>
-            <div class="mt-2">
-                <label for="countries_multiple"
-                       class="block mb-2 text-base font-medium text-gray-900 dark:text-gray-400">Оберіть
-                    можливості</label>
-                <select multiple id="capabilities"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected>Choose countries</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="FR">France</option>
-                    <option value="DE">Germany</option>
-                </select>
-            </div>
-            <div class="mt-2">
-                <label class="block mb-2 text-base font-medium text-gray-900 dark:text-gray-300"
-                       for="multiple_files">
-                    Оберіть фотографії помешкання
+                <label for="categories" class="block mb-2 text-base font-medium text-gray-900 dark:text-gray-400">
+                    Оберіть тип помешкання
                 </label>
-                <input class="block w-full text-sm
-                text-gray-900 bg-gray-50
-                rounded-lg border border-gray-300
-                cursor-pointer focus:outline-none"
-                       id="multiple_files"
-                       type="file"
-                       multiple
-                >
+                <VueMultiselect
+                    v-model="v$.category_id.$model"
+                    :options="categories"
+                    :multiple="true"
+                    placeholder="Оберіть тип помешкання"
+                    label="title"
+                    track-by="id"
+                ></VueMultiselect>
+                <p class="text-red-600 text-sm font-bold" v-show="v$.category_id.$error">
+                    Обов'язкове для заповнення.
+                </p>
             </div>
             <div class="mt-2">
-                <label for="countries_multiple"
-                       class="block mb-2 text-base font-medium text-gray-900 dark:text-gray-400">Оберіть шаблон
-                    оренди</label>
-                <select multiple id="rent-info"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected>Choose countries</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="FR">France</option>
-                    <option value="DE">Germany</option>
-                </select>
+                <label for="opportunities" class="block mb-2 text-base font-medium text-gray-900 dark:text-gray-400">
+                    Оберіть можливості для відпочинку
+                </label>
+                <VueMultiselect
+                    v-model="v$.opportunity_id.$model"
+                    :options="opportunities"
+                    :multiple="true"
+                    placeholder="Оберіть можливості для вільного часу"
+                    label="title"
+                    track-by="id"
+                ></VueMultiselect>
+                <p class="text-red-600 text-sm font-bold" v-show="v$.opportunity_id.$error">
+                    Обов'язкове для заповнення.
+                </p>
+            </div>
+            <div class="mt-2">
+                <label for="stars" class="block mb-2 text-base font-medium text-gray-900 dark:text-gray-400">
+                    Оберіть зірковість
+                </label>
+                <VueMultiselect
+                    v-model="v$.star_id.$model"
+                    :options="stars"
+                    placeholder="Оберіть зірковість"
+                    label="title"
+                    track-by="id"
+                ></VueMultiselect>
+                <p class="text-red-600 text-sm font-bold" v-show="v$.star_id.$error">
+                    Обов'язкове для заповнення.
+                </p>
+            </div>
+            <div class="mt-2">
+                <label for="rent-info" class="block mb-2 text-base font-medium text-gray-900 dark:text-gray-400">
+                    Оберіть шаблон оренди
+                </label>
+                <VueMultiselect
+                    v-model="v$.rent_info_id.$model"
+                    :options="rentInfo"
+                    placeholder="Оберіть шаблон оренди"
+                    label="title"
+                    track-by="id"
+                ></VueMultiselect>
+                <p class="text-red-600 text-sm font-bold" v-show="v$.rent_info_id.$error">
+                    Обов'язкове для заповнення.
+                </p>
             </div>
             <div class="text-center mt-8">
-                <button class="py-2 px-8 text-white bg-blue-900 font-bold">Додати помешкання</button>
+                <button class="py-2 px-8 text-white bg-blue-900 font-bold" @click="addAccommodation">
+                    Додати помешкання
+                </button>
             </div>
         </div>
     </section>
@@ -160,15 +175,16 @@
 
 <script>
 import {useStore} from "vuex";
-import {reactive,computed} from "vue";
+import {reactive, computed, onMounted} from "vue";
 import useVuelidate from "@vuelidate/core";
 import {required, minValue} from "@vuelidate/validators";
+import VueMultiselect from  "vue-multiselect";
 
 export default {
     name: "RegisterAccommodationForm",
+    components: {VueMultiselect},
     setup() {
         const store = useStore()
-
         const accommodation = reactive({
             title: '',
             description: '',
@@ -176,7 +192,25 @@ export default {
             number_of_floors: 1,
             address: '',
             city_id: '',
-            star_id: ''
+            star_id: '',
+            opportunity_id: [],
+            category_id: [],
+            rent_info_id: ''
+        })
+
+        const cities = computed(() => store.getters['city/getCities'])
+        const stars = computed(() => store.getters['star/getStars'])
+        const categories = computed(() => store.getters['category/getCategories'])
+        const opportunities = computed(() => store.getters['opportunity/getOpportunities'])
+        const rentInfo = computed(() => store.getters['rentInfo/getRentInfo'])
+
+
+        onMounted(() => {
+            store.dispatch('city/fetchCities')
+            store.dispatch('star/fetchStars')
+            store.dispatch('category/fetchCategories')
+            store.dispatch('opportunity/fetchOpportunities')
+            store.dispatch('rentInfo/fetchRentInfo')
         })
 
         const rules = computed(() => {
@@ -186,20 +220,43 @@ export default {
                 number_of_rooms: {required, minValue: minValue(1)},
                 number_of_floors: {required, minValue: minValue(1)},
                 address: {required},
+                category_id: {required},
                 city_id: {required},
-                star_id: {required}
+                star_id: {required},
+                opportunity_id: {required},
+                rent_info_id: {required}
             }
         })
 
         const v$ = useVuelidate(rules, accommodation)
 
+        const addAccommodation = () => {
+            v$.value.$validate()
+            if(v$.value.$errors.length === 0) {
+                accommodation.city_id = accommodation.city_id.id
+                accommodation.star_id = accommodation.star_id.id
+                accommodation.category_id = accommodation.category_id.map((c) => c.id)
+                accommodation.opportunity_id = accommodation.opportunity_id.map((o) => o.id)
+                store.dispatch('accommodation/addAccommodation', accommodation)
+                    .then(() => {
+                        store.commit('quest/SET_IS_DISABLED_ACCOMMODATION', true)
+                        store.commit('quest/SET_IS_DISABLED_ACCOMMODATION_IMAGE', false)
+                    })
+            }
+        }
+
         return {
-            v$
+            v$,
+            cities,
+            opportunities,
+            categories,
+            stars,
+            accommodation,
+            rentInfo,
+            addAccommodation
         }
     }
 }
 </script>
 
-<style scoped>
-
-</style>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>

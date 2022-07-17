@@ -20,7 +20,9 @@ export default {
     actions: {
         fetchRentInfo({ commit }) {
             axios.get('/api/user/rent')
-                .then(res => commit('SET_RENT_INFO', res.data.rentInfo))
+                .then(res => {
+                    commit('SET_RENT_INFO', res.data.rent)
+                })
                 .catch(() => commit('SET_FETCH_ERR', true))
         },
 

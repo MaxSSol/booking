@@ -2,7 +2,7 @@ export default {
     namespaced: true,
 
     state: {
-        categories: {},
+        categories: [],
         isLoaded: false
     },
 

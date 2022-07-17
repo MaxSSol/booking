@@ -2,18 +2,19 @@ export default {
     namespaced: true,
 
     state: {
-        stars: {},
+        stars: [],
+
         isLoaded: false
     },
 
     getters: {
-        getStars: state => state.opportunities,
+        getStars: state => state.stars,
         getStatusLoaded: state => state.isLoaded
     },
 
     mutations: {
-        SET_STARS(state, opportunities) {
-            state.opportunities = opportunities
+        SET_STARS(state, stars) {
+            state.stars = stars
         },
 
         SET_ERR_FETCH(state) {
