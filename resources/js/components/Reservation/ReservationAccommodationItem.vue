@@ -4,7 +4,7 @@
                 items-center rounded-lg"
     >
         <div class="w-[300px] h-[300px]">
-            <accommodation-images :images="accommodationUnit.accommodation_unit_images"/>
+            <accommodation-images :src="'/storage/accommodation/units/'" :images="accommodationUnit.accommodation_unit_images"/>
         </div>
         <div class="w-full text-center mt-4 lg:mt-0">
             <p class="text-xl">{{ accommodationUnit.title }}</p>

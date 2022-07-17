@@ -61,3 +61,7 @@ Route::group(['prefix' => 'accommodation/units/image'], function() {
 });
 
 Route::get('/payment', '\App\Http\Controllers\Api\AccommodationPaymentMethodController');
+Route::get('/owner/status', '\App\Http\Controllers\OwnerController');
+Route::get('/unit/facilities', function () {
+    return response()->json(['facilities' => \App\Models\Facility::all()]);
+});

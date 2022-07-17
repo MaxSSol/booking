@@ -1,10 +1,12 @@
 <template>
-
+    <owner-panel/>
 </template>
 
 <script>
+import OwnerPanel from "../components/OwnerPanel/OwnerPanel";
 export default {
-    name: "OwnerAccommodationView"
+    name: "OwnerAccommodationView",
+    components: {OwnerPanel}
 }
 </script>
 
