@@ -6,7 +6,7 @@
         <div class="rent-history-room flex flex-col
              md:flex-row justify-center md:justify-between
              mt-6 p-4 border">
-            <accommodation-images :images="rentHistory.accommodation_unit?.accommodation_unit_images"
+            <accommodation-images :src="'/storage/accommodation/units/'" :images="rentHistory.accommodation_unit?.accommodation_unit_images"
                                   class="h-[200px] w-full lg:w-[400px]"
             />
             <div class="w-2/3 rent-history-room-info ml-0 md:ml-4">
