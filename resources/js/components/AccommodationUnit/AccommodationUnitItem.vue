@@ -1,6 +1,6 @@
 <template>
     <div class="photo mx-auto w-[300px] h-[300px] lg:mr-4">
-        <accommodation-images :images="accommodationUnit.accommodation_unit_images">
+        <accommodation-images :src="'/storage/accommodation/units/'" :images="accommodationUnit.accommodation_unit_images">
         </accommodation-images>
     </div>
     <div class="item-info gap-6 w-2/3 flex flex-col items-center justify-between">

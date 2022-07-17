@@ -12,7 +12,7 @@
                 :key="image.id"
             >
                 <img class="mx-auto"
-                    :src="image.image"
+                    :src="src  + image.image"
                     alt="Unit"
                 />
             </swiper-slide>
@@ -34,6 +34,10 @@ export default {
         images: {
             type: Array,
             require: true
+        },
+        src: {
+            type: String,
+            default: '/storage/accommodation/'
         }
     },
     setup() {

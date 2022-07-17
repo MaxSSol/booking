@@ -13,6 +13,7 @@ import paymentMethod from "./modules/paymentMethod"
 import quest from "./modules/quest";
 import rentInfo from "./modules/rentInfo";
 import city from "./modules/city";
+import owner from "./modules/owner";
 
 export default createStore({
     modules: {
@@ -29,6 +30,7 @@ export default createStore({
         paymentMethod,
         quest,
         rentInfo,
-        city
+        city,
+        owner
     }
 })

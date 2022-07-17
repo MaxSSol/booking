@@ -8,6 +8,9 @@ import ReservationView from "../../views/ReservationView";
 import UserSettingView from "../../views/UserSettingView";
 import RegisterAccommodation from "../../views/RegisterAccommodation";
 import OwnerAccommodationView from "../../views/OwnerAccommodationView";
+import OwnerAccommodationSettingView from "../../views/OwnerAccommodationSettingView";
+import RegisterAccommodationUnitView from "../../views/RegisterAccommodationUnitView";
+import AccommodationUnitImageView from "../../views/AccommodationUnitImageView";
 
 export default [
     {
@@ -70,5 +73,26 @@ export default [
         name: 'user/owner',
         component: OwnerAccommodationView,
         meta: { auth: true }
+    },
+    {
+        path: '/user/owner/accommodation/:id',
+        name: 'owner/accommodation',
+        component: OwnerAccommodationSettingView,
+        meta: { auth: true },
+        props: true
+    },
+    {
+        path: '/user/owner/accommodation/unit',
+        name: 'owner/accommodation/unit',
+        component: RegisterAccommodationUnitView,
+        meta: { auth: true },
+    },
+    {
+        path: '/user/owner/accommodation/unit/:id/image',
+        name: 'owner/accommodation/unit/image',
+        component: AccommodationUnitImageView,
+        meta: {auth: true},
+        props: true
     }
+
 ]

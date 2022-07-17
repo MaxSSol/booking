@@ -1,7 +1,7 @@
 <template>
     <div class="photo mx-auto w-[300px] h-[300px] lg:mr-4">
         <img
-            :src="accommodation.accommodation_images[0]?.image"
+            :src="'/storage/accommodation/' + accommodation.accommodation_images[0]?.image"
             alt="photo"
         >
     </div>
