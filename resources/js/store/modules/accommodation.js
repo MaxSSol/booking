@@ -76,6 +76,17 @@ export default {
                     })
                     .catch(() => reject())
             })
+        },
+        addAccommodationImage({commit, state}, accommodationImages, id) {
+            return new Promise((resolve, reject) => {
+                axios.post('/api/accommodation/image/upload/' + state.accommodation.id, accommodationImages, {
+                    headers: {
+                        'content-type': 'multipart/form-data'
+                    }
+                })
+                    .then(res => resolve())
+                    .catch(() => reject())
+            })
         }
     }
 }

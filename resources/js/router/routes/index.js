@@ -7,6 +7,7 @@ import AccommodationUnitView from "../../views/AccommodationUnitsView"
 import ReservationView from "../../views/ReservationView";
 import UserSettingView from "../../views/UserSettingView";
 import RegisterAccommodation from "../../views/RegisterAccommodation";
+import OwnerAccommodationView from "../../views/OwnerAccommodationView";
 
 export default [
     {
@@ -63,5 +64,11 @@ export default [
         name: 'user/accommodation',
         component: RegisterAccommodation,
         meta: {auth: true}
+    },
+    {
+        path: '/user/owner',
+        name: 'user/owner',
+        component: OwnerAccommodationView,
+        meta: { auth: true }
     }
 ]
