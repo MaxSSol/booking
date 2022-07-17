@@ -22,7 +22,8 @@ class RentInfoController extends Controller
      */
     public function index()
     {
-        return response()->json(['rent' => RentInfo::all()->where('user_id', 1)]);
+        $rentInfo = RentInfo::where('user_id', Auth::user()->id)->get();
+        return response()->json(['rent' => $rentInfo]);
     }
 
     /**

@@ -10,6 +10,7 @@ class RentInfo extends Model
     use HasFactory;
 
     protected $fillable = [
+        'title',
         'rent_for_short_term',
         'rent_for_long_term',
         'free_termination',

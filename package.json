@@ -24,6 +24,7 @@
         "litepie-datepicker": "^1.0.14",
         "swiper": "^8.3.0",
         "vue": "^3.2.36",
+        "vue-multiselect": "^3.0.0-alpha.2",
         "vue-router": "^4.1.1",
         "vuejs-paginate-next": "^1.0.2",
         "vuex": "^4.0.2"

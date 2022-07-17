@@ -2,14 +2,14 @@ export default {
     namespaced: true,
 
     state: {
-        opportunities: {},
+        opportunities: [],
         isLoaded: false
     },
 
     getters: {
         getOpportunities: state => state.opportunities,
         getStatusLoaded: state => state.isLoaded,
-        getPopular: state => state.opportunities.slice(0,2)
+        getPopular: state => state.opportunities.slice(0, 2)
     },
 
     mutations: {
