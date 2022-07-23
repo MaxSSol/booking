@@ -28,7 +28,7 @@ class UpdateUserAccommodationUnitRequest extends FormRequest
             'description' => 'string',
             'number_of_rooms' => 'integer',
             'number_of_floors' => 'integer',
-            'square' => 'string',
+            'square' => 'integer',
             'max_count_people' => 'integer',
             'price' => 'integer',
             'is_available' => 'boolean',

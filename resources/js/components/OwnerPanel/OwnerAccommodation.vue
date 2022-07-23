@@ -40,10 +40,14 @@
                             </td>
                             <td class="px-6 py-4 flex justify-around gap-x-4">
                                 <router-link :to="{name: 'owner/accommodation', params: {'id': item.id }}"
-                                             class="font-medium text-blue-600 hover:underline">
+                                             class="font-medium text-blue-600 hover:underline text-base">
                                     Редагувати
                                 </router-link>
-                                <a href="#" class="font-medium text-blue-600 hover:underline">Видалити</a>
+                                <button class="font-medium text-blue-600 hover:underline text-base"
+                                        @click="removeAccommodation(item.id)"
+                                >
+                                    Видалити
+                                </button>
                             </td>
                         </tr>
                         </tbody>
@@ -63,13 +67,18 @@ export default {
     setup() {
         const store = useStore()
 
-        const accommodation = computed(() => store.getters['owner/getAccommodation'])
+        const accommodation = computed(() => store.getters['owner/getAccommodations'])
         onMounted(() => {
             store.dispatch('owner/fetchOwnerAccommodation')
         })
 
+        const removeAccommodation = (id) => {
+            store.dispatch('owner/removeAccommodation', id)
+        }
+
         return {
-            accommodation
+            accommodation,
+            removeAccommodation
         }
     }
 }

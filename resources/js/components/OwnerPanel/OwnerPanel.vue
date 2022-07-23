@@ -1,5 +1,5 @@
 <template>
-    <tabs-wrapper>
+    <tabs-wrapper class="flex-grow">
         <tab :title="'Помешкання'">
             <owner-accommodation/>
         </tab>

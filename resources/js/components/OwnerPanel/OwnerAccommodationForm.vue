@@ -141,8 +141,10 @@
                 ></VueMultiselect>
             </div>
             <div class="text-center mt-8">
-                <button class="py-2 px-8 text-white bg-blue-900 font-bold" >
-                    Додати помешкання
+                <button class="py-2 px-8 text-white bg-blue-900 font-bold"
+                        @click="updateAccommodation(accommodation)"
+                >
+                    Внести зміни
                 </button>
             </div>
         </div>
@@ -187,11 +189,15 @@
                                 {{ item.date_available_from }}
                             </td>
                             <td class="px-6 py-4 flex justify-around gap-x-4">
-                                <router-link :to="{name: 'owner/accommodation', params: {'id': item.id }}"
-                                             class="font-medium text-blue-600 hover:underline">
+                                <router-link :to="{name: 'unit/setting', params: {'id': item.id }}"
+                                             class="text-base font-medium text-blue-600 hover:underline">
                                     Редагувати
                                 </router-link>
-                                <a href="#" class="font-medium text-blue-600 hover:underline">Видалити</a>
+                                <button class="text-base font-medium text-blue-600 hover:underline"
+                                        @click="removeAccommodationUnit(accommodation.id, item.id)"
+                                >
+                                    Видалити
+                                </button>
                             </td>
                         </tr>
                         </tbody>
@@ -250,6 +256,17 @@ export default {
             store.dispatch('rentInfo/fetchRentInfo')
         })
 
+        const updateAccommodation = (accommodation) => {
+            accommodation.categories = accommodation.categories.map(c => c.id)
+            accommodation.opportunities = accommodation.opportunities.map(o => o.id)
+            store.dispatch('owner/updateAccommodation', accommodation)
+        }
+
+        const removeAccommodationUnit = (accommodationId, unitId) => {
+            store.dispatch('owner/removeAccommodationUnit', {accommodationId, unitId});
+            alert('Кімната успішно видалена')
+        }
+
         return {
             v$,
             cities,
@@ -258,6 +275,8 @@ export default {
             stars,
             accommodation,
             rentInfo,
+            updateAccommodation,
+            removeAccommodationUnit
         }
     }
 }
