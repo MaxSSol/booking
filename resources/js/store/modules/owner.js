@@ -9,6 +9,7 @@ export default {
     getters: {
         getOwnerStatus: state => state.ownerStatus,
         getAccommodation: state => state.accommodation,
+        getAccommodations: state => state.accommodations,
         getFacilities: state => state.facilities
     },
     mutations: {
@@ -18,6 +19,10 @@ export default {
 
         SET_ACCOMMODATION(state, accommodation) {
             state.accommodation = accommodation
+        },
+
+        SET_ACCOMMODATIONS(state, accommodations) {
+            state.accommodations = [...accommodations]
         },
         SET_FACILITIES(state, facilities) {
             state.facilities = facilities
@@ -33,7 +38,7 @@ export default {
         fetchOwnerAccommodation({commit}) {
             axios.get('/api/user/accommodation',)
                 .then(res => {
-                    commit('SET_ACCOMMODATION', res.data.accommodation)
+                    commit('SET_ACCOMMODATIONS', res.data.accommodation)
                 })
         },
 
@@ -72,6 +77,23 @@ export default {
                     .then(() => resolve())
                     .catch(() => reject())
             })
+        },
+
+        removeAccommodation({dispatch}, id) {
+            axios.delete('/api/user/accommodation/' + id)
+                .then(() => {
+                    dispatch('fetchOwnerAccommodation')
+                })
+        },
+
+        removeAccommodationUnit({dispatch}, {accommodationId, unitId}) {
+            axios.delete('/api/user/units/' + unitId)
+                .then(() => dispatch('fetchOwnerAccommodationById', accommodationId))
+        },
+
+        updateAccommodation({dispatch}, accommodation) {
+            axios.patch('/api/user/accommodation/' + accommodation.id, accommodation)
+                .then(() => dispatch('fetchOwnerAccommodationById', accommodation.id))
         }
     }
 }

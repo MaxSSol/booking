@@ -34,7 +34,7 @@ class UserAccommodationUnitService
 
         $update = $accommodationUnit->update($request->validated());
 
-        $accommodationUnit->facilities()->sync($request->facility_id);
+        $accommodationUnit->facilities()->sync($request->facilities);
 
         if ($update) {
             return true;
@@ -47,7 +47,8 @@ class UserAccommodationUnitService
     {
         $accommodationUnit = AccommodationUnit::with(
             'accommodationUnitImages',
-            'facilities'
+            'facilities',
+            'rentInfo'
         )
             ->find($id);
 

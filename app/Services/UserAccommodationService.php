@@ -69,8 +69,8 @@ class UserAccommodationService
 
         $update = $accommodation->update($request->validated());
 
-        $accommodation->categories()->sync($request->category_id);
-        $accommodation->opportunities()->sync($request->opportunity_id);
+        $accommodation->categories()->sync($request->categories);
+        $accommodation->opportunities()->sync($request->opportunities);
 
 
         if ($update) {

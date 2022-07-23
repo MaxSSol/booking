@@ -133,21 +133,6 @@
                 </p>
             </div>
             <div class="mt-2">
-                <label for="accommodation" class="block mb-2 text-base font-medium text-gray-900 dark:text-gray-400">
-                    Оберіть готель
-                </label>
-                <VueMultiselect
-                    v-model="v$.accommodation_id.$model"
-                    :options="accommodation"
-                    placeholder="Оберіть готель"
-                    label="title"
-                    track-by="id"
-                ></VueMultiselect>
-                <p class="text-red-600 text-sm font-bold" v-show="v$.accommodation_id.$error">
-                    Обов'язкове для заповнення.
-                </p>
-            </div>
-            <div class="mt-2">
                 <label for="rent-info" class="block mb-2 text-base font-medium text-gray-900 dark:text-gray-400">
                     Оберіть шаблон бронювання
                 </label>
@@ -167,19 +152,19 @@
                     Оберіть зручності
                 </label>
                 <VueMultiselect
-                    v-model="v$.facility_id.$model"
+                    v-model="v$.facilities.$model"
                     :options="facilities"
                     placeholder="Оберіть зручності"
                     label="title"
                     :multiple="true"
                     track-by="id"
                 ></VueMultiselect>
-                <p class="text-red-600 text-sm font-bold" v-show="v$.facility_id.$error">
+                <p class="text-red-600 text-sm font-bold" v-show="v$.facilities.$error">
                     Обов'язкове для заповнення.
                 </p>
             </div>
             <div class="text-center mt-8">
-                <button class="py-2 px-8 text-white bg-blue-900 font-bold" @click="addUnit">
+                <button class="py-2 px-8 text-white bg-blue-900 font-bold" @click="updateUnit(accommodationUnit)">
                     Додати помешкання
                 </button>
             </div>
@@ -189,36 +174,21 @@
 
 <script>
 import {useStore} from "vuex";
-import {reactive, computed, onMounted} from "vue";
+import {computed, onMounted} from "vue";
 import useVuelidate from "@vuelidate/core";
 import {required, minValue} from "@vuelidate/validators";
 import VueMultiselect from "vue-multiselect";
-import router from "../../router";
 
 export default {
-    name: "OwnerAccommodationUnitFrom",
+    name: "AccommodationUnitSettingForm",
+    props: ['id'],
     components: {VueMultiselect},
-    setup() {
+    setup(props) {
         const store = useStore()
 
-        const accommodationUnit = reactive({
-            title: '',
-            description: '',
-            number_of_rooms: 1,
-            number_of_floors: 1,
-            square: '',
-            max_count_people: '',
-            price: '',
-            is_available: true,
-            date_available_from: '',
-            accommodation_id: '',
-            rent_info_id: '',
-            facility_id: []
-        })
-
+        const accommodationUnit = computed(() => store.getters['accommodationUnit/getAccommodationUnit'])
 
         const facilities = computed(() => store.getters['owner/getFacilities'])
-        const accommodation = computed(() => store.getters['owner/getAccommodations'])
         const rentInfo = computed(() => store.getters['rentInfo/getRentInfo'])
 
         const rules = computed(() => {
@@ -233,7 +203,7 @@ export default {
                 date_available_from: {required},
                 accommodation_id: {required},
                 rent_info_id: {required},
-                facility_id: {required}
+                facilities: {required}
             }
         })
 
@@ -241,35 +211,25 @@ export default {
 
         onMounted(() => {
             store.dispatch('owner/fetchAllFacilities')
-            store.dispatch('owner/fetchOwnerAccommodation')
+            store.dispatch('accommodationUnit/fetchAccommodationUnitById', props.id)
             store.dispatch('rentInfo/fetchRentInfo')
         })
 
-        const addUnit = () => {
+        const updateUnit = (accommodationUnit) => {
             v$.value.$validate()
             if (v$.value.$errors.length === 0) {
-                accommodationUnit.rent_info_id = accommodationUnit.rent_info_id.id;
-                accommodationUnit.accommodation_id = accommodationUnit.accommodation_id.id
-                accommodationUnit.facility_id = accommodationUnit.facility_id.map(f => f.id)
-                store.dispatch('owner/addAccommodationUnit', accommodationUnit)
-                    .then((res) =>
-                        router.push(
-                            {
-                                name: 'owner/accommodation/unit/image',
-                                params: {'id': res.data.accommodationUnit.id}
-                            }
-                        )
-                    )
+                accommodationUnit.rent_info_id = accommodationUnit.rent_info_id?.id;
+                accommodationUnit.facilities = accommodationUnit.facilities.map(f => f.id)
+                store.dispatch('accommodationUnit/updateAccommodationUnit', accommodationUnit)
             }
         }
 
         return {
             v$,
             facilities,
-            accommodation,
             rentInfo,
             accommodationUnit,
-            addUnit
+            updateUnit
         }
     }
 }
