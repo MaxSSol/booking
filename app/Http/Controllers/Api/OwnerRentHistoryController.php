@@ -76,7 +76,7 @@ class OwnerRentHistoryController extends Controller
             ]);
 
             $this->ownerRentHistoryService->changeRentStatus($validated, $id);
-
+            $this->ownerRentHistoryService->sendStatusEmail(RentHistory::findOrFail($id));
             return new OwnerRentHistoryResource(
                 RentHistory::with('accommodationUnit')
                     ->where('id', $id)
