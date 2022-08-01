@@ -21,7 +21,7 @@ class OwnerRentHistoryService
         )
             ->pluck('id');
 
-        return RentHistory::with('accommodationUnit')
+        return RentHistory::with('accommodationUnit', 'user')
             ->whereIn('accommodation_unit_id', $accommodationIds->all())
             ->orderByDesc('check_status')
             ->get();
