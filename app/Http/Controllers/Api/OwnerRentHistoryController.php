@@ -52,7 +52,8 @@ class OwnerRentHistoryController extends Controller
             RentHistory::with(
                 [
                     'accommodationUnit',
-                    'user'
+                    'user',
+                    'paymentMethod'
                 ]
             )
                 ->where('id', $id)

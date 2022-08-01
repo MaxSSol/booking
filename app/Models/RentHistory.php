@@ -31,4 +31,9 @@ class RentHistory extends Model
     {
         return $this->belongsTo(AccommodationUnit::class);
     }
+
+    public function paymentMethod(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(PaymentMethod::class);
+    }
 }
