@@ -5,12 +5,14 @@ export default {
         accommodation: [],
         accommodations: [],
         facilities: [],
+        rentHistories: []
     },
     getters: {
         getOwnerStatus: state => state.ownerStatus,
         getAccommodation: state => state.accommodation,
         getAccommodations: state => state.accommodations,
-        getFacilities: state => state.facilities
+        getFacilities: state => state.facilities,
+        getRentHistories: state => state.rentHistories,
     },
     mutations: {
         SET_OWNER_STATUS(state, status) {
@@ -26,6 +28,9 @@ export default {
         },
         SET_FACILITIES(state, facilities) {
             state.facilities = facilities
+        },
+        SET_RENT_HISTORIES(state, rentHistories) {
+            state.rentHistories = rentHistories
         }
     },
     actions: {
@@ -94,6 +99,17 @@ export default {
         updateAccommodation({dispatch}, accommodation) {
             axios.patch('/api/user/accommodation/' + accommodation.id, accommodation)
                 .then(() => dispatch('fetchOwnerAccommodationById', accommodation.id))
+        },
+
+        fetchRentHistories({commit}) {
+            axios.get('/api/owner/rent/histories')
+                .then(res => commit('SET_RENT_HISTORIES', res.data.data))
+        },
+
+        updateRentStatus({dispatch}, {id, status}) {
+            axios.put('/api/owner/rent/histories/' + id, {'check_status': status})
+                .then(() => dispatch('fetchRentHistories'))
         }
+
     }
 }

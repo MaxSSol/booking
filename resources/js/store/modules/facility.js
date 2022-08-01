@@ -32,7 +32,6 @@ export default {
                 params: searchParams
             })
                 .then(res => {
-                    console.log(res)
                     commit('SET_FACILITIES', res.data.data)
                     commit('SET_LOADED')
                 })
