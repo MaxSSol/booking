@@ -6,6 +6,7 @@ use App\Exceptions\RentHistoryException;
 use App\Models\Accommodation;
 use App\Models\AccommodationUnit;
 use App\Models\RentHistory;
+use App\Notifications\UpdateRentStatusEmail;
 use Illuminate\Support\Facades\Auth;
 
 class OwnerRentHistoryService
@@ -39,5 +40,10 @@ class OwnerRentHistoryService
         }
 
        throw new RentHistoryException('An error occurred while changing the status');
+    }
+
+    public function sendStatusEmail($rentHistory)
+    {
+        $rentHistory->user->notify(new UpdateRentStatusEmail($rentHistory));
     }
 }
