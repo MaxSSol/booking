@@ -49,7 +49,12 @@ class OwnerRentHistoryController extends Controller
     public function show($id)
     {
         return new OwnerRentHistoryResource(
-            RentHistory::with('accommodationUnit')
+            RentHistory::with(
+                [
+                    'accommodationUnit',
+                    'user'
+                ]
+            )
                 ->where('id', $id)
                 ->get()
         );
