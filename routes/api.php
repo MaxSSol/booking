@@ -42,6 +42,7 @@ Route::apiResources([
     'user/rent' => \App\Http\Controllers\Api\RentInfoController::class,
     'payment/methods' => \App\Http\Controllers\Api\PaymentMethodController::class,
     'cities' => \App\Http\Controllers\Api\CityController::class,
+    'owner/rent/histories' => \App\Http\Controllers\Api\OwnerRentHistoryController::class,
 ]);
 
 
