@@ -43,6 +43,7 @@ Route::apiResources([
     'payment/methods' => \App\Http\Controllers\Api\PaymentMethodController::class,
     'cities' => \App\Http\Controllers\Api\CityController::class,
     'owner/rent/histories' => \App\Http\Controllers\Api\OwnerRentHistoryController::class,
+    'user/comments' => \App\Http\Controllers\Api\UserCommentController::class,
 ]);
 
 

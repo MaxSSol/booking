@@ -80,4 +80,9 @@ class AccommodationUnit extends Model
     {
         return $this->belongsTo(RentInfo::class);
     }
+
+    public function accommodationComments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(AccommodationComment::class);
+    }
 }
