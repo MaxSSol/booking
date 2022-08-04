@@ -11,6 +11,7 @@ import OwnerAccommodationView from "../../views/OwnerAccommodationView";
 import OwnerAccommodationSettingView from "../../views/OwnerAccommodationSettingView";
 import RegisterAccommodationUnitView from "../../views/RegisterAccommodationUnitView";
 import AccommodationUnitImageView from "../../views/AccommodationUnitImageView";
+import OwnerAccommodationUnitSettingView from "../../views/OwnerAccommodationUnitSettingView";
 
 export default [
     {
@@ -93,6 +94,14 @@ export default [
         component: AccommodationUnitImageView,
         meta: {auth: true},
         props: true
+    },
+    {
+        path: '/user/owner/accommodation/unit/:id',
+        name: 'unit/setting',
+        component: OwnerAccommodationUnitSettingView,
+        props: true,
+        meta: {auth:true}
+
     }
 
 ]

@@ -16,11 +16,13 @@ class CitySeeder extends Seeder
     public function run()
     {
         City::factory()
-            ->count(5)
+            ->count(4)
             ->state(new Sequence(
                 ['title' => 'Київ'],
                 ['title' => 'Дніпро'],
-                ['title' => 'Запоріжжя']
+                ['title' => 'Запоріжжя'],
+                ['title' => 'Львів'],
+                ['title' => 'Харків']
             ))
             ->create();
     }

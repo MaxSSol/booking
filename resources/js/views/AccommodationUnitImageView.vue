@@ -1,5 +1,5 @@
 <template>
-    <section class="accommodation-image mt-6 px-4 lg:px-0">
+    <section class="flex-grow accommodation-image mt-6 px-4 lg:px-0">
         <div class="flex justify-center flex-col">
             <p>Завантажте зображення головної будівлі {{accommodationUnit.title}}</p>
             <div>
@@ -16,9 +16,11 @@
                        @change="addImages"
                 >
             </div>
-            <button class="py-2 px-8 text-white bg-blue-900 font-bold" @click="uploadImages">
+            <div class="flex justify-center mt-4">
+            <button class="w-full lg:w-1/3 py-2 px-8 text-white bg-blue-900 font-bold" @click="uploadImages">
                 Завантажити
             </button>
+            </div>
         </div>
     </section>
 </template>
@@ -37,7 +39,7 @@ export default {
         const accommodationImages = ref([])
 
         onMounted(() => {
-            store.dispatch('owner/fetchOwnerAccommodationById', props.id)
+            store.dispatch('owner/fetchAccommodationUnitById', props.id)
         })
 
         const addImages = (event) => {

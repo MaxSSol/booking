@@ -7,11 +7,14 @@ services:
             dockerfile: docker/fpm/Dockerfile
         volumes:
             - ./:/var/www/html
+            - ./docker/fpm/conf.d/php.ini:/usr/local/etc/php/php.ini
+            - ./docker/fpm/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
         links:
             -   mysql
         restart: unless-stopped
         container_name: "${APP_NAME}"
         user: "1000:1000"
+
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
@@ -23,6 +26,7 @@ services:
             MYSQL_USER: '${DB_USERNAME}'
             MYSQL_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
+
     nginx:
         build:
             context: .
@@ -35,6 +39,7 @@ services:
         volumes:
             - ./:/var/www/html
         container_name: "${APP_NAME}-nginx"
+
     npm:
       image: node:latest
       container_name: "${APP_NAME}-npm"
@@ -42,3 +47,8 @@ services:
         - ./:/var/www/html
       working_dir: /var/www/html
       entrypoint: [ 'npm' ]
+
+    selenium:
+        image: 'selenium/standalone-chrome'
+        volumes:
+            - '/dev/shm:/dev/shm'

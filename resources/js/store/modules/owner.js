@@ -5,11 +5,14 @@ export default {
         accommodation: [],
         accommodations: [],
         facilities: [],
+        rentHistories: []
     },
     getters: {
         getOwnerStatus: state => state.ownerStatus,
         getAccommodation: state => state.accommodation,
-        getFacilities: state => state.facilities
+        getAccommodations: state => state.accommodations,
+        getFacilities: state => state.facilities,
+        getRentHistories: state => state.rentHistories,
     },
     mutations: {
         SET_OWNER_STATUS(state, status) {
@@ -19,8 +22,15 @@ export default {
         SET_ACCOMMODATION(state, accommodation) {
             state.accommodation = accommodation
         },
+
+        SET_ACCOMMODATIONS(state, accommodations) {
+            state.accommodations = [...accommodations]
+        },
         SET_FACILITIES(state, facilities) {
             state.facilities = facilities
+        },
+        SET_RENT_HISTORIES(state, rentHistories) {
+            state.rentHistories = rentHistories
         }
     },
     actions: {
@@ -33,7 +43,7 @@ export default {
         fetchOwnerAccommodation({commit}) {
             axios.get('/api/user/accommodation',)
                 .then(res => {
-                    commit('SET_ACCOMMODATION', res.data.accommodation)
+                    commit('SET_ACCOMMODATIONS', res.data.accommodation)
                 })
         },
 
@@ -72,6 +82,34 @@ export default {
                     .then(() => resolve())
                     .catch(() => reject())
             })
+        },
+
+        removeAccommodation({dispatch}, id) {
+            axios.delete('/api/user/accommodation/' + id)
+                .then(() => {
+                    dispatch('fetchOwnerAccommodation')
+                })
+        },
+
+        removeAccommodationUnit({dispatch}, {accommodationId, unitId}) {
+            axios.delete('/api/user/units/' + unitId)
+                .then(() => dispatch('fetchOwnerAccommodationById', accommodationId))
+        },
+
+        updateAccommodation({dispatch}, accommodation) {
+            axios.patch('/api/user/accommodation/' + accommodation.id, accommodation)
+                .then(() => dispatch('fetchOwnerAccommodationById', accommodation.id))
+        },
+
+        fetchRentHistories({commit}) {
+            axios.get('/api/owner/rent/histories')
+                .then(res => commit('SET_RENT_HISTORIES', res.data.data))
+        },
+
+        updateRentStatus({dispatch}, {id, status}) {
+            axios.put('/api/owner/rent/histories/' + id, {'check_status': status})
+                .then(() => dispatch('fetchRentHistories'))
         }
+
     }
 }

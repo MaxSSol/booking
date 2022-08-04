@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\RentHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +43,8 @@ Route::apiResources([
     'user/rent' => \App\Http\Controllers\Api\RentInfoController::class,
     'payment/methods' => \App\Http\Controllers\Api\PaymentMethodController::class,
     'cities' => \App\Http\Controllers\Api\CityController::class,
+    'owner/rent/histories' => \App\Http\Controllers\Api\OwnerRentHistoryController::class,
+    'user/comments' => \App\Http\Controllers\Api\UserCommentController::class,
 ]);
 
 

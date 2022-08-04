@@ -15,9 +15,6 @@ class FacilitySeeder extends Seeder
      */
     public function run()
     {
-        Facility::factory()
-            ->count(3)
-            ->hasAttached(AccommodationUnit::all()->first())
-            ->create();
+        Facility::factory()->count(5)->create();
     }
 }

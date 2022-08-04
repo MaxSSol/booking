@@ -14,21 +14,20 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-           UserSeeder::class,
-           RoleSeeder::class,
-           PaymentMethodSeeder::class,
-           RentInfoSeeder::class,
-           CitySeeder::class,
-           StarSeeder::class,
-           AccommodationSeeder::class,
-           AccommodationUnitSeeder::class,
-           OpportunitySeeder::class,
-           CategorySeeder::class,
-           FacilitySeeder::class,
-           AccommodationImageSeeder::class,
-           AccommodationUnitImageSeeder::class,
-           RentHistorySeeder::class,
-           AccommodationCommentSeeder::class,
+            UserSeeder::class,
+            RoleSeeder::class,
+            RentInfoSeeder::class,
+            CitySeeder::class,
+            StarSeeder::class,
+            OpportunitySeeder::class,
+            CategorySeeder::class,
+            FacilitySeeder::class,
+            AccommodationSeeder::class,
+            AccommodationUnitSeeder::class,
+            AccommodationImageSeeder::class,
+            AccommodationUnitImageSeeder::class,
+            RentHistorySeeder::class,
+            AccommodationCommentSeeder::class,
         ]);
     }
 }

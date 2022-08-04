@@ -75,4 +75,14 @@ class AccommodationUnit extends Model
                 'city_id'
             );
     }
+
+    public function rentInfo(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(RentInfo::class);
+    }
+
+    public function accommodationComments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(AccommodationComment::class);
+    }
 }

@@ -24,4 +24,9 @@ class RentInfo extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function accommodationUnits(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(AccommodationUnit::class);
+    }
 }

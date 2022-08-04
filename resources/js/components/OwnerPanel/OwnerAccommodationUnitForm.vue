@@ -218,7 +218,7 @@ export default {
 
 
         const facilities = computed(() => store.getters['owner/getFacilities'])
-        const accommodation = computed(() => store.getters['owner/getAccommodation'])
+        const accommodation = computed(() => store.getters['owner/getAccommodations'])
         const rentInfo = computed(() => store.getters['rentInfo/getRentInfo'])
 
         const rules = computed(() => {

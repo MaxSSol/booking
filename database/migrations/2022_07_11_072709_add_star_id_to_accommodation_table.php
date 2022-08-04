@@ -26,7 +26,7 @@ class AddStarIdToAccommodationTable extends Migration
     public function down()
     {
         Schema::table('accommodation', function (Blueprint $table) {
-            $table->dropForeign('star_id');
+            $table->dropConstrainedForeignId('star_id');
         });
     }
 }

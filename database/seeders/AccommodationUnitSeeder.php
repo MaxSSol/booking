@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Accommodation;
 use App\Models\AccommodationUnit;
+use App\Models\Facility;
 use App\Models\RentInfo;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class AccommodationUnitSeeder extends Seeder
@@ -17,10 +19,14 @@ class AccommodationUnitSeeder extends Seeder
     public function run()
     {
         AccommodationUnit::factory()
-            ->count(10)
-            ->create([
-                'rent_info_id' => RentInfo::all()->first(),
-                'accommodation_id' => Accommodation::all()->first()
-            ]);
+            ->count(200)
+            ->hasAttached(Facility::all()->random())
+            ->state(new Sequence(
+                fn($sequence) => [
+                    'rent_info_id' => RentInfo::all()->random(),
+                    'accommodation_id' => Accommodation::all()->random()
+                ]
+            ))
+            ->create();
     }
 }
