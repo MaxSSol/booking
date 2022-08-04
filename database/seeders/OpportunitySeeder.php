@@ -15,9 +15,6 @@ class OpportunitySeeder extends Seeder
      */
     public function run()
     {
-        Opportunity::factory()
-            ->count(3)
-            ->hasAttached(Accommodation::all()->first())
-            ->create();
+        Opportunity::factory()->count(5)->create();
     }
 }
