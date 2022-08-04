@@ -9,6 +9,16 @@ use Tests\DuskTestCase;
 class RegistrationTest extends DuskTestCase
 {
     use DatabaseMigrations;
+
+    public function test_registration_page_with_wrong_credentials()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/registration')
+                ->press('Зареєструватися')
+                ->assertSee('Обов\'язкове для заповнення');
+        });
+    }
+
     /**
      * A Dusk test example.
      *

@@ -12,6 +12,18 @@ class LoginTest extends DuskTestCase
 
     use DatabaseMigrations;
 
+    public function test_login_page_with_wrong_credentials()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/login')
+                ->type('#email', 'test@user.com')
+                ->type('#password', 'password')
+                ->press('Увійти')
+                ->pause(2000)
+                ->assertSee('Перевірте надані дані');
+        });
+    }
+
     /**
      * A Dusk test example.
      *
