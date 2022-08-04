@@ -14,7 +14,7 @@ class AccommodationFactory extends Factory
     public function definition()
     {
         return [
-            'title' => 'Kiev Hotel',
+            'title' => $this->faker->city() . ' Hotel',
             'description' => $this->faker->realText(),
             'number_of_rooms' => $this->faker->numberBetween(10,20),
             'number_of_floors' => $this->faker->numberBetween(1,9),

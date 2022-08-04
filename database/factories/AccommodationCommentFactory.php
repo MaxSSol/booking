@@ -22,7 +22,7 @@ class AccommodationCommentFactory extends Factory
 
         return [
             'comment' => $this->faker->sentence(),
-            'total_rating' => $rating->avg(),
+            'total_rating' => floor($rating->avg()),
             'location' => $rating['location'],
             'facilities' => $rating['facilities'],
             'service' => $rating['service'],
