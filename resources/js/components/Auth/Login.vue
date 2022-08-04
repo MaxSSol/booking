@@ -6,14 +6,14 @@
                 <p class="text-base text-red-600 font-bold">Перевірте надані дані</p>
             </div>
             <div class="w-full lg:w-2/3">
-                <auth-input type="email" name="email" title="Електронна адреса" v-model="v$.email.$model">
+                <auth-input type="email" :name="'email'" title="Електронна адреса" v-model="v$.email.$model">
                 </auth-input>
                 <p class="text-red-600 text-sm font-bold" v-show="v$.email.$errors[0]">
                     Обов'язкове для заповнення
                 </p>
             </div>
             <div class="w-full lg:w-2/3">
-                <auth-input type="password" name="password" title="Пароль" v-model="v$.password.$model"></auth-input>
+                <auth-input type="password" :name="'password'" title="Пароль" v-model="v$.password.$model"></auth-input>
                 <p class="text-red-600 text-sm font-bold" v-show="v$.password.$errors[0]">
                     Обов'язкове для заповнення. Мінімальна довжина 8 символів.
                 </p>

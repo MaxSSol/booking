@@ -18,3 +18,5 @@ yarn-error.log
 /public/css
 /public/js
 package-lock.json
+.env.dusk.local
+.env.testing

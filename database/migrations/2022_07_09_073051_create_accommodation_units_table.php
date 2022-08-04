@@ -37,6 +37,9 @@ class CreateAccommodationUnitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accommodation_unit');
+        Schema::table('accommodation_units', function (Blueprint $table) {
+            $table->dropForeign('accommodation_units_accommodation_id_foreign');
+        });
+        Schema::dropIfExists('accommodation_units');
     }
 }

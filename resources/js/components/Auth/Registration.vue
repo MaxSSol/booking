@@ -18,7 +18,7 @@
                 </p>
             </div>
             <div class="w-full lg:w-2/3">
-                <auth-input type="text" name="first_name" title="Ім'я" v-model="v$.first_name.$model">
+                <auth-input type="text" :name="'first_name'" title="Ім'я" v-model="v$.first_name.$model">
                 </auth-input>
                 <p class="text-red-600 text-sm font-bold" v-show="v$.first_name.$errors[0]">
                     Обов'язкове для заповнення
