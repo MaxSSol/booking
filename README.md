@@ -1,4 +1,5 @@
 # Аналог системи Booking.com
+![example workflow](https://github.com/maxssol/booking/actions/workflows/laravel.yml/badge.svg)
 ## Технічні відомості
 - PHP 7.4
 - Laravel 8
