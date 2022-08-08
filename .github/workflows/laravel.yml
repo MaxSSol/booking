@@ -58,6 +58,12 @@ jobs:
         run: php artisan test
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+      - name: Docker compose build
+        run: docker-compose up -d
+      - name: Npm i
+        run: docker-compose run npm i --force
+      - name: Run prod
+        run: docker-compose run prod
       - name: Login to Heroku Container registry
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
