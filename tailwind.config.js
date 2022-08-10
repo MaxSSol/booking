@@ -6,7 +6,7 @@ module.exports = {
     content: [
         './resources/**/*.blade.php',
         './resources/**/*.vue',
-        path.resolve(__dirname, './node_modules/litepie-datepicker/**/*.js')
+        path.resolve(__dirname, './node_modules/litepie-datepicker-tw3/**/*.js')
     ],
     theme: {
         extend: {

@@ -1,8 +1,8 @@
 name: Testing Laravel
 on: [ push, pull_request ]
 jobs:
-  laravel:
-    name: Booking
+  build:
+    name: Build laravel project
     runs-on: ubuntu-latest
     env:
       DB_DATABASE: laravel
@@ -35,7 +35,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, dom, fileinfo, mysql, gd, libjpeg-dev, libpng-dev
+          extensions: mbstring, dom, fileinfo, mysql, gd
           coverage: xdebug
 
 
@@ -58,21 +58,14 @@ jobs:
         run: php artisan test
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-      - name: Docker compose build
-        run: docker-compose up -d
-      - name: Npm i
-        run: docker-compose run npm i --force
-      - name: Run prod
-        run: docker-compose run prod
-      - name: Login to Heroku Container registry
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:login
-      - name: Build and push
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:push -a ${{ secrets.HEROKU_APP_NAME }} web
-      - name: Release
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          branch: "main"
