@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import LitepieDatepicker from 'litepie-datepicker';
+import LitepieDatepickerTw3 from 'litepie-datepicker-tw3';
 import { ref, reactive, computed } from "vue";
 import {useStore} from "vuex";
 import useVuelidate from "@vuelidate/core";
@@ -95,7 +95,7 @@ import router from "../../router";
 
 export default {
     name: "SearchForm",
-    components: { LitepieDatepicker },
+    components: { LitepieDatepicker :LitepieDatepickerTw3 },
     setup() {
         const store = useStore();
 
