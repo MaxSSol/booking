@@ -1,5 +1,11 @@
 name: Testing Laravel
-on: [ push, pull_request ]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 jobs:
   build:
     name: Build laravel project
@@ -26,7 +32,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-versions: [ '7.4' ]
+        php-versions: [ '7.4', '8.1' ]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
