@@ -18,6 +18,7 @@ class UserCommentController extends Controller
 
     public function __construct(UserCommentService $userCommentService)
     {
+        $this->middleware('auth:sanctum');
         $this->userCommentService = $userCommentService;
     }
 
@@ -49,12 +50,12 @@ class UserCommentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     * @return Response
+     * @param int $accommodation_unit_id
+     * @return UserCommentResource
      */
-    public function show($id)
+    public function show(int $accommodation_unit_id)
     {
-        //
+        return new UserCommentResource($this->userCommentService->getComment($accommodation_unit_id));
     }
 
     /**
