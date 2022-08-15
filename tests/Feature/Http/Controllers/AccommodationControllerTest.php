@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Accommodation;
 use App\Models\Category;
@@ -8,13 +8,10 @@ use App\Models\City;
 use App\Models\Opportunity;
 use App\Models\Star;
 use App\Models\User;
-use Faker\Provider\Address;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class AccommodationTest extends TestCase
+class AccommodationControllerTest extends TestCase
 {
     use DatabaseMigrations;
 
