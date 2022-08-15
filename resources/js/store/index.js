@@ -14,6 +14,7 @@ import quest from "./modules/quest";
 import rentInfo from "./modules/rentInfo";
 import city from "./modules/city";
 import owner from "./modules/owner";
+import accommodationComment from "./modules/accommodationComment";
 
 export default createStore({
     modules: {
@@ -31,6 +32,7 @@ export default createStore({
         quest,
         rentInfo,
         city,
-        owner
+        owner,
+        accommodationComment
     }
 })

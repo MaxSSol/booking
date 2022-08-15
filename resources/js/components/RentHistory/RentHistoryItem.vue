@@ -23,15 +23,29 @@
                     <p class="text-xl font-bold">Ціна за добу: {{ rentHistory.price }}</p>
                     <p class="text-xl font-bold">Разом: {{ rentHistory.total_price }}</p>
                 </div>
-                <popup v-if="popupTrigger" :toggle-popup="popupToggle" :title="'Приховати'">
-                    <rent-history-popup :rent-history="rentHistory"/>
-                </popup>
-                <button @click="popupToggle"
-                        :disabled="rentHistory.check_status === 'unchecked'"
-                        class="text-base text-white px-8 py-2 bg-blue-900 hover:opacity-50"
-                >
-                    Переглянути подробиці
-                </button>
+                <div>
+                    <popup v-if="rentTrigger" :toggle-popup="rentToggle" :title="'Приховати'">
+                        <rent-history-popup :rent-history="rentHistory"/>
+                    </popup>
+                    <button @click="popupToggle"
+                            :disabled="rentHistory.check_status === 'unchecked'"
+                            class="text-base text-white px-8 py-2 bg-blue-900 hover:opacity-50 w-full"
+                    >
+                        Переглянути подробиці
+                    </button>
+                </div>
+                <div>
+                    <popup v-if="commentTrigger" :toggle-popup="commentToggle" :title="'Приховати'">
+                        <comment-form :accommodation-unit="rentHistory.accommodation_unit"></comment-form>
+                    </popup>
+                    <button v-if="CurrentDate >= rentHistory.rent_date_to"
+                            @click="commentToggle"
+                            :disabled="rentHistory.check_status === 'unchecked'"
+                            class="text-base text-white px-8 py-2 bg-blue-900 hover:opacity-50 w-full mt-2"
+                    >
+                        Додати відгук
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -42,10 +56,12 @@ import AccommodationImages from "../Accommodation/AccommodationImages";
 import {ref} from "vue";
 import Popup from "../Popup/Popup";
 import RentHistoryPopup from "./RentHistoryPopup";
+import CurrentDate from "../../helpers/CurrentDate";
+import CommentForm from "../Comment/CommentForm";
 
 export default {
     name: "RentHistoryItem",
-    components: {RentHistoryPopup, Popup, AccommodationImages},
+    components: {CommentForm, RentHistoryPopup, Popup, AccommodationImages},
     props: {
         rentHistory: {
             type: Object,
@@ -53,14 +69,22 @@ export default {
         }
     },
     setup() {
-        let popupTrigger = ref(false)
-        const popupToggle = () => {
-            popupTrigger.value = popupTrigger.value !== true
+        let rentTrigger = ref(false)
+        const rentToggle = () => {
+            rentTrigger.value = rentTrigger.value !== true
+        }
+
+        let commentTrigger = ref(false)
+        const commentToggle = () => {
+            commentTrigger.value = commentTrigger.value !== true
         }
 
         return {
-            popupToggle,
-            popupTrigger
+            rentToggle,
+            rentTrigger,
+            commentToggle,
+            commentTrigger,
+            CurrentDate
         }
     }
 }
