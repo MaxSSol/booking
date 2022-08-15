@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Http\Controllers;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
-class RegistrationTest extends TestCase
+class RegistrationControllerTest extends TestCase
 {
     use DatabaseMigrations;
 
